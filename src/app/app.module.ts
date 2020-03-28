@@ -37,6 +37,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from "@angular/router";
 import { SignInComponent } from './sign-in/sign-in.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
     SignInComponent,
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
