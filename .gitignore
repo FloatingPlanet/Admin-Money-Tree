@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 # firebase credentials
-/src/environments/*
+/src/environments
