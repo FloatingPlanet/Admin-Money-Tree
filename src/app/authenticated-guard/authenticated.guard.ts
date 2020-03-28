@@ -15,15 +15,28 @@ export class AuthenticatedGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        return true;
-      } else {
-        this.router.navigate(['login']);
-        return false;
-      }
+    return new Promise((result) => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          return user.getIdTokenResult().then((tokenResult) => {
+            if (tokenResult.claims.admin === 'admin') {
+              return (true);
+            } else {
+              this.router.navigate(['login']);
+              return false;
+            }
+          }).catch(() => {
+            this.router.navigate(['login']);
+            return false;
+          })
+        } else {
+          this.router.navigate(['login']);
+          result(false);
+        }
+      })
+      this.router.navigate(['login']);
+      result(false);
     })
-    return false;
   }
 
 }

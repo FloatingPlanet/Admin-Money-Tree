@@ -25,17 +25,25 @@
         <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
 
         <!-- Register -->
-        <p>Not a Admin?
-            <a href="">Register</a>
+        <p>Need grant a permisson?
+            <input name="admin-email" [(ngModel)]="adminEmail">
+            <a (click)="grantPermission()">Grant</a>
         </p>
 
         <!-- Social login -->
         <p>or sign in with:</p>
 
-        <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-        <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
-        <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
-        <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+        <a (click)="thirdPartyLogin('facebook')" class="mx-2" role="button"><i
+                class="fab fa-facebook-f light-blue-text"></i></a>
+
+        <a (click)="thirdPartyLogin('twitter')" class="mx-2" role="button"><i
+                class="fab fa-twitter light-blue-text"></i></a>
+
+        <a (click)="thirdPartyLogin('github')" class="mx-2" role="button"><i
+                class="fab fa-github light-blue-text"></i></a>
+
+        <a (click)="thirdPartyLogin('google')" class="mx-2" role="button"><i
+                class="fab fa-google light-blue-text"></i></a>
 
     </form>
 </div>

@@ -4,6 +4,9 @@
       "hosting": {
         "admin-money-tree": [
           "fake-money-tree"
+        ],
+        "admin": [
+          "admin-money-tree"
         ]
       }
     }
