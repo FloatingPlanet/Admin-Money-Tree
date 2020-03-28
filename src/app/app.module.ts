@@ -38,6 +38,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from "@angular/router";
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserService } from './services/user/user.service';
 
 
 @NgModule({
@@ -82,7 +83,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatPaginatorModule,
     RouterModule,
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

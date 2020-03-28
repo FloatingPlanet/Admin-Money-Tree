@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fake-money-tree": {
+      "hosting": {
+        "admin-money-tree": [
+          "fake-money-tree"
+        ]
+      }
+    }
+  }
+}
