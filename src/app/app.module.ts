@@ -39,6 +39,7 @@ import { RouterModule } from "@angular/router";
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user/user.service';
+import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 
 
 @NgModule({
@@ -83,7 +84,10 @@ import { UserService } from './services/user/user.service';
     MatPaginatorModule,
     RouterModule,
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    AuthenticatedGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
