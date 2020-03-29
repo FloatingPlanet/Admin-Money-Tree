@@ -29,12 +29,13 @@
 
                 <!-- grant permission -->
                 <div class="md-form form-sm">
-                    <input type="text" id="form1" [(ngModel)]="adminEmail" class="form-control">
-                    <label for="form1">Enter new Admin Email</label>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-elegant btn-sm"><i class="far fa-user pr-2"
-                            (click)="grantPermission()" aria-hidden="true"></i>Grant</button>
+                    <input type="email" id="form1" name="new-admin-email" [(ngModel)]="adminEmail" class="form-control">
+                    <label for="form1">Grant new Admin Email</label>
+                    <button type="button" class="btn btn-elegant btn-sm" (click)="grantPermission()">
+                        <i class="far fa-user pr-2">
+                            Grant
+                        </i>
+                    </button>
                 </div>
 
                 <!-- Social login -->

@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
   }
 
   public grantPermission() {
+    console.log('??')
     this.us.addAdminRole(this.adminEmail);
   }
 
