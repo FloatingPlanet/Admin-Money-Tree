@@ -1,9 +1,24 @@
-<div class="container-fluid w-75">
-    <nb-layout>
-        <nb-layout-header class="container-fluid w-75" fixed>Floating Planet</nb-layout-header>
+<div class="container-fluid custom-size mt-8">
+    <nb-layout class="pt-5">
+        <nb-layout-header class="container-fluid custom-size header" fixed>
+            <div class="company">
+                <a class="logo" href="#">
+                    <span class="name">Floating Planet</span>
+                </a>
+            </div>
+
+            <div class=" float-right admin-actions size-small ">
+                <nb-actions size="small">
+                    <nb-action icon="search-outline"></nb-action>
+                    <nb-action icon="power-outline" (click)="logout()"></nb-action>
+                </nb-actions>
+            </div>
+
+
+        </nb-layout-header>
 
         <nb-sidebar>
-            <div class="h-100">
+            <div>
                 <nb-menu [items]="items" autoCollapse="true">
                 </nb-menu>
             </div>

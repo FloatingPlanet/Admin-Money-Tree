@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme'
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -53,9 +54,11 @@ export class AdminPageComponent implements OnInit {
       ],
     },
   ];
-  constructor() { }
+  constructor(private us: UserService) { }
 
   ngOnInit() {
   }
-
+  public logout() {
+    this.us.logout();
+  }
 }

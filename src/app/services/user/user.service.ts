@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 })
 export class UserService {
 
+
   constructor() { }
 
   public login(email: string, pwd: string) {
@@ -23,40 +24,61 @@ export class UserService {
   /*
   * third party login
   */
-  public loginWithFacebook() {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    this.thirdPartyLogin(provider);
-  }
-  public loginWithTwitter() {
-    const provider = new firebase.auth.TwitterAuthProvider();
-    this.thirdPartyLogin(provider);
-  }
-  public loginWithGithub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-    this.thirdPartyLogin(provider);
-  }
+  public thirdPartyLoginDispatcher(method: string) {
+    let provider: firebase.auth.AuthProvider;
 
-  public loginWithGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    this.thirdPartyLogin(provider);
-  }
+    switch (method) {
+      case 'facebook':
+        provider = new firebase.auth.FacebookAuthProvider();
+        break;
+      case 'twitter':
+        provider = new firebase.auth.TwitterAuthProvider();
+        break;
+      case 'github':
+        provider = new firebase.auth.GithubAuthProvider();
+        break;
+      case 'google':
+        provider = new firebase.auth.GoogleAuthProvider();
+        break;
 
+      default:
+        break;
+    }
+    this.thirdPartyLogin(provider).then((res) => {
+      console.log(res);
+    }).catch((error) => {
+      console.error(error);
+    });
+
+  }
   public thirdPartyLogin(provider: firebase.auth.AuthProvider) {
     return firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
       return firebase.auth().signInWithPopup(provider).then((result) => {
-
+        return result;
       })
-    }).catch((error) => { console.error(error); })
-
+    }).catch((error) => {
+      console.error(error);
+      return error;
+    })
   }
   /*
   * end of login method
   */
 
   /*
+  * logout
+  */
+  public logout() {
+    return firebase.auth().signOut().then(() => {
+      console.log('you signed out');
+    }).catch((error) => {
+      console.error(error);
+      return error;
+    })
+  }
+  /*
   * grant admin permission
   */
-
   public addAdminRole(adminEmail: string) {
     var functions = firebase.functions();
 

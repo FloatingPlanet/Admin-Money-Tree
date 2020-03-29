@@ -41,7 +41,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user/user.service';
 import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonModule, NbLayoutModule, NbSidebarService, NbMenuModule, NbListModule, NbMenuService, } from '@nebular/theme';
+import { NbActionsModule, NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonModule, NbLayoutModule, NbSidebarService, NbMenuModule, NbListModule, NbMenuService, } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -93,7 +93,8 @@ import { NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonMod
     NbMenuModule.forRoot(),
     NbIconModule,
     NbListModule,
-    NbCardModule
+    NbCardModule,
+    NbActionsModule,
   ],
   providers: [
     UserService,
