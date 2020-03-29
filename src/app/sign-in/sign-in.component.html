@@ -1,50 +1,59 @@
 <!-- Default form login -->
-<div class="container-fluid pt-5 w-50">
-    <form class="text-center border border-light p-5" action="#!">
+<div class="container pt-5">
+    <div class="row align-items-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto">
+            <form class="text-center border border-light p-5" action="#!">
 
-        <p class="h4 mb-4">Sign in</p>
+                <p class="h4 mb-4">Sign in</p>
 
-        <!-- Email -->
-        <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+                <!-- Email -->
+                <input type="email" id="defaultLoginFormEmail" disabled class="form-control mb-4" placeholder="E-mail">
 
-        <!-- Password -->
-        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+                <!-- Password -->
+                <input type="password" id="defaultLoginFormPassword" disabled class="form-control mb-4"
+                    placeholder="Password">
 
-        <div class="d-flex justify-content-around">
-            <div>
-                <!-- Remember me -->
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                    <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                <div class="d-flex justify-content-around">
+                    <div>
+                        <!-- Remember me -->
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                            <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
+                <!-- Sign in button -->
+                <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+                <!-- grant permission -->
+                <div class="md-form form-sm">
+                    <input type="text" id="form1" [(ngModel)]="adminEmail" class="form-control">
+                    <label for="form1">Enter new Admin Email</label>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-elegant btn-sm"><i class="far fa-user pr-2"
+                            (click)="grantPermission()" aria-hidden="true"></i>Grant</button>
+                </div>
+
+                <!-- Social login -->
+                <p>or sign in with:</p>
+
+                <a (click)="thirdPartyLogin('facebook')" class="mx-2" role="button"><i
+                        class="fab fa-facebook-f light-blue-text"></i></a>
+
+                <a (click)="thirdPartyLogin('twitter')" class="mx-2" role="button"><i
+                        class="fab fa-twitter light-blue-text"></i></a>
+
+                <a (click)="thirdPartyLogin('github')" class="mx-2" role="button"><i
+                        class="fab fa-github light-blue-text"></i></a>
+
+                <a (click)="thirdPartyLogin('google')" class="mx-2" role="button"><i
+                        class="fab fa-google light-blue-text"></i></a>
+
+            </form>
         </div>
-
-        <!-- Sign in button -->
-        <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
-
-        <!-- Register -->
-        <p>Need grant a permisson?
-            <input name="admin-email" [(ngModel)]="adminEmail">
-            <a (click)="grantPermission()">Grant</a>
-        </p>
-
-        <!-- Social login -->
-        <p>or sign in with:</p>
-
-        <a (click)="thirdPartyLogin('facebook')" class="mx-2" role="button"><i
-                class="fab fa-facebook-f light-blue-text"></i></a>
-
-        <a (click)="thirdPartyLogin('twitter')" class="mx-2" role="button"><i
-                class="fab fa-twitter light-blue-text"></i></a>
-
-        <a (click)="thirdPartyLogin('github')" class="mx-2" role="button"><i
-                class="fab fa-github light-blue-text"></i></a>
-
-        <a (click)="thirdPartyLogin('google')" class="mx-2" role="button"><i
-                class="fab fa-google light-blue-text"></i></a>
-
-    </form>
+    </div>
 </div>
 <!-- Default form login -->
