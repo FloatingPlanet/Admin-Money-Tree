@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import * as firebase from 'firebase';
 export class UserService {
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public login(email: string, pwd: string) {
     firebase.auth().signInWithEmailAndPassword(email, pwd).then((res) => {
@@ -45,7 +46,13 @@ export class UserService {
         break;
     }
     this.thirdPartyLogin(provider).then((res) => {
-      console.log(res);
+      res.user.getIdTokenResult().then((user) => {
+        if (user.claims.admin) {
+          this.router.navigate(['']);
+        } else {
+          console.error('you are not admin')
+        }
+      })
     }).catch((error) => {
       console.error(error);
     });
