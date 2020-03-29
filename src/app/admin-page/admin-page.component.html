@@ -1,12 +1,14 @@
 <div class="container-fluid custom-size mt-8">
     <nb-layout class="pt-5">
         <nb-layout-header class="container-fluid custom-size header" fixed>
+            <a (click)="toggleSideBar()" href="#" class="sidebar-toggle">
+                <nb-icon icon="menu-2-outline"></nb-icon>
+            </a>
             <div class="company">
                 <a class="logo" href="#">
                     <span class="name">Floating Planet</span>
                 </a>
             </div>
-
             <div class=" float-right admin-actions size-small ">
                 <nb-actions size="small">
                     <nb-action icon="search-outline"></nb-action>
@@ -17,7 +19,7 @@
 
         </nb-layout-header>
 
-        <nb-sidebar>
+        <nb-sidebar tag="left">
             <div>
                 <nb-menu [items]="items" autoCollapse="true">
                 </nb-menu>

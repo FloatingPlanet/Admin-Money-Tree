@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NbMenuItem } from '@nebular/theme'
+import { NbMenuItem, NbSidebarService } from '@nebular/theme'
 import { UserService } from '../services/user/user.service';
 
 @Component({
@@ -54,11 +54,14 @@ export class AdminPageComponent implements OnInit {
       ],
     },
   ];
-  constructor(private us: UserService) { }
+  constructor(private us: UserService, private sidebarService: NbSidebarService) { }
 
   ngOnInit() {
   }
   public logout() {
     this.us.logout();
+  }
+  public toggleSideBar() {
+    this.sidebarService.toggle(true, 'left');
   }
 }
