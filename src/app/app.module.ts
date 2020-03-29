@@ -40,7 +40,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user/user.service';
 import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
-
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonModule, NbLayoutModule, NbSidebarService, NbMenuModule, NbListModule, NbMenuService, } from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -84,10 +85,20 @@ import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
     MatSortModule,
     MatPaginatorModule,
     RouterModule,
+    NbThemeModule.forRoot(),
+    NbEvaIconsModule,
+    NbLayoutModule,
+    NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
+    NbButtonModule,
+    NbMenuModule.forRoot(),
+    NbIconModule,
+    NbListModule,
+    NbCardModule
   ],
   providers: [
     UserService,
-    AuthenticatedGuard
+    AuthenticatedGuard,
+    NbSidebarService, NbMenuService
   ],
   bootstrap: [AppComponent]
 })
