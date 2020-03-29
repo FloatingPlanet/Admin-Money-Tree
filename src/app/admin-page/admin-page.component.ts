@@ -11,50 +11,43 @@ export class AdminPageComponent implements OnInit {
   items: NbMenuItem[] = [
     {
       title: 'Coupons',
-      icon: 'menu-outline',
+      icon: 'star-outline',
       expanded: true,
       children: [
         {
           title: 'Coupons',
-          icon: 'star-outline'
+          link: '', // goes into angular `routerLink`
         },
-
       ],
     },
     {
       title: 'Orders',
-      icon: 'menu-outline',
-
+      icon: 'car-outline',
       children: [
         {
           title: 'Orders',
-          icon: 'car-outline',
-
+          link: '', // goes into angular `routerLink`
         },
-
       ],
     },
     {
       title: 'Products',
-      icon: 'menu-outline',
-
+      icon: 'cube-outline',
       children: [
         {
           title: 'Products',
-          icon: 'cube-outline'
+          link: '', // goes into angular `routerLink`
         },
 
       ],
     },
     {
       title: 'Permission',
-      icon: 'menu-outline',
-
+      icon: 'lock-outline',
       children: [
         {
           title: 'Permission',
-          icon: 'lock-outline',
-
+          link: '', // goes into angular `routerLink`
         },
 
       ],
