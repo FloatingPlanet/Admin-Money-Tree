@@ -19,23 +19,22 @@ export class AuthenticatedGuard implements CanActivate {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           return user.getIdTokenResult().then((tokenResult) => {
-            if (tokenResult.claims.admin === 'admin') {
-              return (true);
+            if (tokenResult.claims.admin) {
+              result(true);
             } else {
               this.router.navigate(['login']);
-              return false;
+              result(false);
             }
           }).catch(() => {
             this.router.navigate(['login']);
-            return false;
+
+            result(false);
           })
         } else {
           this.router.navigate(['login']);
           result(false);
         }
       })
-      this.router.navigate(['login']);
-      result(false);
     })
   }
 

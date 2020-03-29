@@ -65,6 +65,8 @@ export class UserService {
       email: adminEmail
     }).then((res) => {
       console.log(res);
+    }).catch((error) => {
+      console.error(error);
     })
   }
 

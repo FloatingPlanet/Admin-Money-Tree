@@ -70,10 +70,11 @@ export const onUserCartUpdate =
 
 export const grantPermission = functions.https.onCall((data, context) => {
     // get user and add custom claim(admin)
+    console.log('grant')
     return admin.auth().getUserByEmail(data.email).then((user) => {
         return admin.auth().setCustomUserClaims(user.uid, {
             admin: true
-        });
+        })
     }).then(() => {
         console.log(`${data.email} added as Admin`);
         return {
