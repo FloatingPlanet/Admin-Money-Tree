@@ -1,63 +1,31 @@
-<div class="row">
-    <div class="col-lg-6">
+<div class="row ">
+    <div class="col-12 col-sm-10 col-md-6 col-lg-6 col-xl-4 m-auto">
         <nb-card>
-            <nb-card-header>Default Inputs</nb-card-header>
+            <nb-card-header>Grant Permission for a New Admin</nb-card-header>
             <nb-card-body>
-                <input type="text" nbInput fullWidth placeholder="Project">
-                <div class="full-name-inputs">
-                    <input type="text" nbInput fullWidth placeholder="Nick">
-                    <input type="text" nbInput fullWidth placeholder="Last Name">
-                </div>
-                <input type="password" nbInput fullWidth placeholder="Password">
-                <input type="text" nbInput fullWidth shape="rectangle" placeholder="Rectangle border">
-                <input type="text" nbInput fullWidth shape="semi-round" placeholder="Semi-round border">
-                <input type="text" nbInput fullWidth shape="round" placeholder="Rounded border">
-                <input type="text" nbInput fullWidth placeholder="Disabled input" disabled />
-                <textarea rows="5" nbInput fullWidth shape="round" placeholder="Text Area"></textarea>
-                <input type="text" nbInput fullWidth fieldSize="small" placeholder="Small Input">
-                <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Medium Input">
-                <input type="text" nbInput fullWidth fieldSize="large" placeholder="Large Input">
+                <form [formGroup]="grantPermissionForm">
+                    <div class="form-group">
+                        <label for="target-email" class="label">Email address</label>
+                        <input formControlName="adminEmail1" name="admin-email-1" id="target-email" type="email" nbInput
+                            fullWidth status="warning" placeholder="@">
+                    </div>
+                    <div class="form-group">
+                        <label for="re-target-email" class="label">Re-Enter Email above</label>
+                        <input formControlName="adminEmail2" name="admin-email-2" id="re-target-email" type="email"
+                            nbInput fullWidth status="danger" placeholder="@">
+                        <mat-error *ngIf="!this.grantPermissionForm.valid">
+                            Two Emails have to be <strong>IDENTICAL</strong> and in <strong>RIGHT FORMAT</strong>
+                        </mat-error>
+                    </div>
+                    <div class="form-group">
+                        <nb-checkbox status="danger" [disabled]="!this.grantPermissionForm.valid"
+                            (click)="this.userAgree()">I know what I am doing</nb-checkbox>
+                    </div>
+                    <button [disabled]="!this.grantPermissionForm.valid" (click)="this.proceedGrantPermission()"
+                        nbButton hero status="danger">Grant</button>
+                </form>
             </nb-card-body>
         </nb-card>
     </div>
 
-    <div class="col-lg-6">
-
-        <nb-card>
-            <nb-card-header>Select</nb-card-header>
-            <nb-card-body>
-                <nb-select selected="1">
-                    <nb-option value="1">Option 1</nb-option>
-                    <nb-option value="2">Option 2</nb-option>
-                </nb-select>
-            </nb-card-body>
-        </nb-card>
-
-        <nb-card>
-            <nb-card-header>Validation States</nb-card-header>
-            <nb-card-body>
-                <input type="text" nbInput fullWidth status="info" placeholder="Input with Info">
-                <input type="text" nbInput fullWidth status="success" placeholder="Warning Input">
-                <input type="text" nbInput fullWidth status="warning" placeholder="Danger Input">
-                <input type="text" nbInput fullWidth status="danger" placeholder="Danger Input">
-                <input type="text" nbInput fullWidth status="primary" placeholder="Input with Primary">
-                <div class="validation-checkboxes">
-                    <nb-checkbox status="success">Success Checkbox</nb-checkbox>
-                    <nb-checkbox status="warning">Warning Checkbox</nb-checkbox>
-                    <nb-checkbox status="danger">Danger Checkbox</nb-checkbox>
-                </div>
-            </nb-card-body>
-        </nb-card>
-
-        <nb-card>
-            <nb-card-header>Checkboxes & Radios</nb-card-header>
-            <nb-card-body class="checkbox-radio">
-                <div class="demo-items">
-                    <nb-checkbox>Checkbox 1</nb-checkbox>
-                    <nb-checkbox [value]="true">Checkbox 2</nb-checkbox>
-                </div>
-
-            </nb-card-body>
-        </nb-card>
-    </div>
 </div>

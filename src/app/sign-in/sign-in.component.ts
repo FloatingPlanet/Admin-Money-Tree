@@ -13,10 +13,6 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-  public grantPermission() {
-    console.log('??')
-    this.us.addAdminRole(this.adminEmail);
-  }
 
   public thirdPartyLogin(method: string) {
     this.us.thirdPartyLoginDispatcher(method);

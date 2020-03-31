@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AdminPageComponent } from './admin-page/admin-page.component';
@@ -77,6 +77,7 @@ import {
     AdminAdminsComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     BrowserModule,
