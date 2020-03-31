@@ -41,16 +41,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user/user.service';
 import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+
+// ****************** component ******************//
+import { AdminPermissionComponent } from './admin-page/tabs/admin-admins/admin-permission/admin-permission.component';
+import { AdminAdminsComponent } from './admin-page/tabs/admin-admins/admin-admins.component';
+
+
+// ****************** UI framework ******************//
 import {
   NbDatepickerModule,
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
-  NbUserModule, NbCheckboxModule, NbActionsModule, NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonModule, NbLayoutModule, NbSidebarService, NbMenuModule, NbListModule, NbMenuService,
+  NbUserModule,
+  NbCheckboxModule,
+  NbActionsModule,
+  NbCardModule,
+  NbIconModule,
+  NbThemeModule,
+  NbSidebarModule,
+  NbButtonModule,
+  NbLayoutModule,
+  NbSidebarService,
+  NbMenuModule,
+  NbListModule,
+  NbMenuService,
 } from '@nebular/theme';
-
-import { AdminPermissionComponent } from './admin-page/admin-admins/admin-permission/admin-permission.component';
-import { AdminAdminsComponent } from './admin-page/admin-admins/admin-admins.component';
 
 @NgModule({
   declarations: [
