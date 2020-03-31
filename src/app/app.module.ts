@@ -41,13 +41,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user/user.service';
 import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbActionsModule, NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonModule, NbLayoutModule, NbSidebarService, NbMenuModule, NbListModule, NbMenuService, } from '@nebular/theme';
+import {
+  NbDatepickerModule,
+  NbInputModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbUserModule, NbCheckboxModule, NbActionsModule, NbCardModule, NbIconModule, NbThemeModule, NbSidebarModule, NbButtonModule, NbLayoutModule, NbSidebarService, NbMenuModule, NbListModule, NbMenuService,
+} from '@nebular/theme';
+
+import { AdminPermissionComponent } from './admin-page/admin-admins/admin-permission/admin-permission.component';
+import { AdminAdminsComponent } from './admin-page/admin-admins/admin-admins.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminPageComponent,
     SignInComponent,
+    AdminPermissionComponent,
+    AdminAdminsComponent,
   ],
   imports: [
     FormsModule,
@@ -95,6 +106,12 @@ import { NbActionsModule, NbCardModule, NbIconModule, NbThemeModule, NbSidebarMo
     NbListModule,
     NbCardModule,
     NbActionsModule,
+    NbCheckboxModule,
+    NbDatepickerModule,
+    NbInputModule,
+    NbRadioModule,
+    NbSelectModule,
+    NbUserModule,
   ],
   providers: [
     UserService,

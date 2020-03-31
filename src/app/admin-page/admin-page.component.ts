@@ -11,14 +11,19 @@ export class AdminPageComponent implements OnInit {
   public showFiller = true;
   items: NbMenuItem[] = [
     {
-      title: 'Coupons',
-      icon: 'star-outline',
+      title: 'Accounts',
+      icon: 'people-outline',
       expanded: true,
+
       children: [
         {
-          title: 'Coupons',
-          link: '', // goes into angular `routerLink`
+          title: 'Admins',
+          link: '/users/admin/admins', // goes into angular `routerLink`
         },
+        {
+          title: 'Customers',
+          link: '/users/customers', // goes into angular `routerLink`
+        }
       ],
     },
     {
@@ -26,31 +31,39 @@ export class AdminPageComponent implements OnInit {
       icon: 'car-outline',
       children: [
         {
-          title: 'Orders',
-          link: '', // goes into angular `routerLink`
+          title: 'Active Orders',
+          link: '/orders/active-orders', // goes into angular `routerLink`
+        },
+        {
+          title: 'Completed Orders',
+          link: '/orders/completed-orders', // goes into angular `routerLink`
         },
       ],
     },
     {
-      title: 'Products',
+      title: 'Collections',
       icon: 'cube-outline',
       children: [
         {
           title: 'Products',
-          link: '', // goes into angular `routerLink`
+          link: '/collections/products', // goes into angular `routerLink`
+        },
+        {
+          title: 'Categories',
+          link: '/collections/catogories', // goes into angular `routerLink`
         },
 
       ],
     },
+
     {
-      title: 'Permission',
-      icon: 'lock-outline',
+      title: 'Promotions',
+      icon: 'star-outline',
       children: [
         {
-          title: 'Permission',
-          link: '', // goes into angular `routerLink`
+          title: 'Coupons',
+          link: '/promotions/coupons', // goes into angular `routerLink`
         },
-
       ],
     },
   ];
