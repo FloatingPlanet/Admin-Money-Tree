@@ -43,9 +43,8 @@ import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 // ****************** component ******************//
-import { AdminPermissionComponent } from './admin-page/tabs/admin-admins/admin-permission/admin-permission.component';
-import { AdminAdminsComponent } from './admin-page/tabs/admin-admins/admin-admins.component';
-
+import { PermissionComponent } from './admin-page/tabs/admin-admins/account/permission/permission.component';
+import { AccountComponent } from './admin-page/tabs/admin-admins/account/account.component';
 
 // ****************** UI framework ******************//
 import {
@@ -68,13 +67,14 @@ import {
   NbMenuService,
 } from '@nebular/theme';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     AdminPageComponent,
     SignInComponent,
-    AdminPermissionComponent,
-    AdminAdminsComponent,
+    PermissionComponent,
+    AccountComponent,
   ],
   imports: [
     ReactiveFormsModule,

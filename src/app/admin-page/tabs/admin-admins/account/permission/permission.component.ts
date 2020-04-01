@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
-  selector: 'app-admin-permission',
-  templateUrl: './admin-permission.component.html',
-  styleUrls: ['./admin-permission.component.scss']
+  selector: 'app-permission',
+  templateUrl: './permission.component.html',
+  styleUrls: ['./permission.component.scss']
 })
-export class AdminPermissionComponent implements OnInit {
+export class PermissionComponent implements OnInit {
+
   public grantPermissionForm: FormGroup;
   public checked: boolean = false;
   constructor(private formBuilder: FormBuilder, private us: UserService
@@ -41,4 +42,5 @@ export class AdminPermissionComponent implements OnInit {
       console.error('you naugty boy, requirements are not meet!');
     }
   }
+
 }
