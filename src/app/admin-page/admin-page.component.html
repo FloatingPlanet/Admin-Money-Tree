@@ -1,6 +1,6 @@
-<div class="container-fluid custom-size mt-8">
-    <nb-layout class="pt-5">
-        <nb-layout-header class="container-fluid custom-size header" fixed>
+<div class="custom-size mt-8">
+    <nb-layout class="" windowMode>
+        <nb-layout-header class="custom-size window-mode with-scroll" fixed>
             <a (click)="toggleSideBar()" class="sidebar-toggle">
                 <nb-icon icon="menu-2-outline"></nb-icon>
             </a>
@@ -19,9 +19,9 @@
 
         </nb-layout-header>
 
-        <nb-sidebar tag="left">
+        <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
             <div>
-                <nb-menu [items]="items" autoCollapse="true">
+                <nb-menu [items]="items">
                 </nb-menu>
             </div>
         </nb-sidebar>
