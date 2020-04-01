@@ -19,7 +19,7 @@ export class AdminPageComponent implements OnInit {
 
         {
           title: 'Admins',
-          link: '/users/admin/admins', // goes into angular `routerLink`
+          link: '/accounts/admins', // goes into angular `routerLink`
         },
         {
           title: 'Customers',

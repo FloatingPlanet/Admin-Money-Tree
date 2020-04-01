@@ -8,13 +8,18 @@ import { Coupon } from 'src/app/models/coupon';
 })
 export class CouponsService {
   private Coupons: AngularFirestoreCollection<Coupon>;
-  public allCoupons: Coupon[];
+  public allCoupons: Coupon[] = [];
 
   constructor(private db: AngularFirestore) {
-    this.Coupons = this.db.collection('Coupons', ref => ref.orderBy('addedAt').limit(100));
-    this.Coupons.valueChanges().subscribe((coupons) => {
-      this.allCoupons = coupons;
-    });
+    this.Coupons = this.db.collection('Coupons', ref => ref.orderBy('addedAt'));
+  }
+
+  public loadCoupons(): Promise<Coupon[]> {
+    return new Promise((resolve) => {
+      this.Coupons.valueChanges().subscribe((coupons) => {
+        resolve(coupons);
+      })
+    })
   }
 
   /*

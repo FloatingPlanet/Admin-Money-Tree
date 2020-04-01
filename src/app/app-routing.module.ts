@@ -3,16 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import { PermissionComponent } from './admin-page/tabs/admin-admins/account/permission/permission.component';
-import { AccountComponent } from './admin-page/tabs/admin-admins/account/account.component';
+import { PermissionComponent } from './admin-page/tabs/account/admins/permission/permission.component';
+import { AdminsComponent } from './admin-page/tabs/account/admins/admins.component';
+import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.component';
 
 
 const routes: Routes = [
   {
     path: '', component: AdminPageComponent, canActivate: [AuthenticatedGuard],
     children: [
-      { path: 'users/admin/admins', component: AccountComponent },
-      { path: 'users/admin/permission', component: PermissionComponent },
+      /*
+      * account tab
+      */
+      { path: 'accounts/admins', component: AdminsComponent },
+      { path: 'accounts/admins/permission', component: PermissionComponent },
+
+      /*
+      * promotions
+      */
+      { path: 'promotions/coupons', component: CouponsComponent },
     ]
   },
   { path: 'login', component: SignInComponent }

@@ -1,3 +1,24 @@
+// ****************** UI framework ******************//
+import {
+  NbDatepickerModule,
+  NbInputModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbUserModule,
+  NbCheckboxModule,
+  NbActionsModule,
+  NbCardModule,
+  NbIconModule,
+  NbThemeModule,
+  NbSidebarModule,
+  NbButtonModule,
+  NbLayoutModule,
+  NbSidebarService,
+  NbMenuModule,
+  NbListModule,
+  NbMenuService,
+} from '@nebular/theme';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,31 +62,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './services/user/user.service';
 import { AuthenticatedGuard } from './authenticated-guard/authenticated.guard';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { CouponsService } from './services/coupons/coupons.service';
+import { AngularFireModule } from '@angular/fire';
 
 // ****************** component ******************//
-import { PermissionComponent } from './admin-page/tabs/admin-admins/account/permission/permission.component';
-import { AccountComponent } from './admin-page/tabs/admin-admins/account/account.component';
+import { PermissionComponent } from './admin-page/tabs/account/admins/permission/permission.component';
+import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.component';
+import { AdminsComponent } from './admin-page/tabs/account/admins/admins.component';
 
-// ****************** UI framework ******************//
-import {
-  NbDatepickerModule,
-  NbInputModule,
-  NbRadioModule,
-  NbSelectModule,
-  NbUserModule,
-  NbCheckboxModule,
-  NbActionsModule,
-  NbCardModule,
-  NbIconModule,
-  NbThemeModule,
-  NbSidebarModule,
-  NbButtonModule,
-  NbLayoutModule,
-  NbSidebarService,
-  NbMenuModule,
-  NbListModule,
-  NbMenuService,
-} from '@nebular/theme';
 
 
 @NgModule({
@@ -74,7 +78,8 @@ import {
     AdminPageComponent,
     SignInComponent,
     PermissionComponent,
-    AccountComponent,
+    AdminsComponent,
+    CouponsComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -129,11 +134,14 @@ import {
     NbRadioModule,
     NbSelectModule,
     NbUserModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
     UserService,
+    CouponsService,
     AuthenticatedGuard,
-    NbSidebarService, NbMenuService
+    NbSidebarService,
+    NbMenuService,
   ],
   bootstrap: [AppComponent]
 })
