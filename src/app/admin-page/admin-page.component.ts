@@ -76,6 +76,7 @@ export class AdminPageComponent implements OnInit {
     this.us.logout();
   }
   public toggleSideBar() {
-    this.sidebarService.toggle(true, 'left');
+    this.sidebarService.toggle(true, 'menu-sidebar');
+
   }
 }
