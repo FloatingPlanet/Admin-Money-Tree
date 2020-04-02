@@ -1,0 +1,64 @@
+<div class="row" *ngIf="couponForm">
+    <div class="col-10 col-sm-10 col-md-6 col-lg-4 col-xl-3 m-auto">
+        <nb-card>
+            <nb-card-body class="coupon-form-col">
+                <form [formGroup]="couponForm" (ngSubmit)="onSubmit(couponForm)">
+                    <div class=" form-container">
+                        <div class="form-group">
+
+                            <label>New Coupon</label>
+                            <input type="text" nbInput fullWidth status="primary" placeholder="SUMMERISHERE"
+                                formControlName="coupon" required placeholder="coupon" [readonly]="this.notEditable"
+                                oninput="this.value = this.value.toUpperCase(); ">
+                            <mat-error *ngIf="this.couponForm['controls']
+  .coupon.hasError('existCoupon')">
+                                *this coupon already exists
+                            </mat-error>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Discount</label>
+                            <input type="number" formControlName="discount" required placeholder="discount" nbInput
+                                fullWidth status="primary" placeholder="0.8">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>From</label>
+                                <input type="date" formControlName="from" required placeholder="from" nbInput fullWidth
+                                    status="primary" placeholder="Primary">
+                            </div>
+                            <div class="form-group col-6">
+                                <label>To</label>
+                                <input type="date" formControlName="to" required placeholder="to" nbInput fullWidth
+                                    status="primary" placeholder="Primary">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" formControlName="amount" required placeholder="amount" nbInput
+                                fullWidth status="primary" placeholder="199">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Free Shipping</label>
+                            <div class="row m-auto">
+                                <nb-radio class="col-6" *ngFor="let option of options" [checked]="option.checked"
+                                    [disabled]="option.disabled" [value]="option.value">
+                                    {{ option.label }}
+                                </nb-radio>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Minimum Spend</label>
+                            <input type="number" formControlName="minimumSpend" required placeholder="Minimum Spend"
+                                nbInput fullWidth status="primary" placeholder="200">
+                        </div>
+                        <button type="submit" [disabled]="!couponForm.valid">Submit</button>
+                    </div>
+                </form>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -72,6 +72,7 @@ import { PermissionComponent } from './admin-page/tabs/account/admins/permission
 import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.component';
 import { AdminsComponent } from './admin-page/tabs/account/admins/admins.component';
 import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admins/permission/permission-granted-modal/permission-granted-modal.component';
+import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
 
 
 
@@ -84,6 +85,7 @@ import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admin
     AdminsComponent,
     CouponsComponent,
     PermissionGrantedModalComponent,
+    CouponFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -139,6 +141,7 @@ import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admin
     NbRadioModule,
     NbSelectModule,
     NbUserModule,
+    NbRadioModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
