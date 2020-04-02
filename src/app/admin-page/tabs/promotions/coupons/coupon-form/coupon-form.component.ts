@@ -45,7 +45,7 @@ export class CouponFormComponent implements OnInit {
     this.cs.addCoupon(cf.value).then(result => {
       setTimeout(() => {
         this.loading = false;
-        this.router.navigate(['promotions/coupons']).then(() => { })
+        this.dismiss();
         this.resetForm();
       }, 500);
 
@@ -92,6 +92,11 @@ export class CouponFormComponent implements OnInit {
       });
       console.log(this.couponForm.value);
     }).catch((error) => console.log(error));
+  }
+
+  public dismiss() {
+    this.router.navigate(['promotions/coupons']).then(() => { })
+
   }
 
   ngOnDestroy(): void {

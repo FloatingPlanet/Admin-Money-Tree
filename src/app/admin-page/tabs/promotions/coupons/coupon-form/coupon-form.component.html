@@ -1,5 +1,5 @@
 <div class="row" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}" *ngIf="couponForm">
-    <div class="col-10 col-sm-10 col-md-6 col-lg-4 col-xl-3 m-auto">
+    <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-4 m-auto">
         <nb-card>
             <nb-card-body class="coupon-form-col">
                 <form [formGroup]="couponForm" (ngSubmit)="onSubmit(couponForm)">
@@ -57,7 +57,12 @@
                             <input type="number" formControlName="minimumSpend" required placeholder="Minimum Spend"
                                 nbInput fullWidth status="primary" placeholder="200">
                         </div>
-                        <button nbButton hero status="success" type="submit" [disabled]="!couponForm.valid">Add</button>
+                        <div>
+                            <button nbButton hero status="success" type="submit"
+                                [disabled]="!couponForm.valid">Add</button>
+                            <button class="float-right" nbButton hero status="warning" type="button"
+                                (click)="this.dismiss()">Cancel</button>
+                        </div>
                     </div>
                 </form>
             </nb-card-body>
