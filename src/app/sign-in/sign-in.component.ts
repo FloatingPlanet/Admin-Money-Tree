@@ -7,15 +7,13 @@ import { UserService } from '../services/user/user.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  public adminEmail: string = '';
   constructor(private us: UserService) { }
 
   ngOnInit() {
   }
 
-
   public thirdPartyLogin(method: string) {
     this.us.thirdPartyLoginDispatcher(method);
-
   }
+
 }

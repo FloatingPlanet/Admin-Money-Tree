@@ -22,7 +22,7 @@ import {
 } from '@nebular/theme';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -74,8 +74,11 @@ import { AdminsComponent } from './admin-page/tabs/account/admins/admins.compone
 import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admins/permission/permission-granted-modal/permission-granted-modal.component';
 import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
 import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
+import { SplashService } from './services/splash/splash.service';
 
-
+export function initialization(ss: SplashService) {
+  return () => ss.initializeMyApp();
+}
 
 @NgModule({
   declarations: [
@@ -152,7 +155,13 @@ import { AdminIndexComponent } from './admin-page/admin-index/admin-index.compon
     AuthenticatedGuard,
     NbSidebarService,
     NbMenuService,
-    NbDialogService
+    NbDialogService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initialization,
+      deps: [SplashService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
