@@ -7,15 +7,18 @@ import { PermissionComponent } from './admin-page/tabs/account/admins/permission
 import { AdminsComponent } from './admin-page/tabs/account/admins/admins.component';
 import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.component';
 import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
+import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
 
 
 const routes: Routes = [
   {
     path: '', component: AdminPageComponent, canActivate: [AuthenticatedGuard],
     children: [
+      { path: 'home', component: AdminIndexComponent },
       /*
       * account tab
       */
+
       { path: 'accounts/admins', component: AdminsComponent },
       { path: 'accounts/admins/permission', component: PermissionComponent },
 

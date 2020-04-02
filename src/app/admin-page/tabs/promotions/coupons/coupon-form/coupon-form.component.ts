@@ -24,7 +24,9 @@ export class CouponFormComponent implements OnInit {
     { value: '1', label: 'Yes', checked: true },
     { value: '0', label: 'No' },
   ];
-  constructor(private formBuilder: FormBuilder, private cs: CouponsService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private cs: CouponsService, private route: ActivatedRoute, private router: Router) {
+
+  }
 
 
   ngOnInit() {

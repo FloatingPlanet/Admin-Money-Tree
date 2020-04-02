@@ -73,6 +73,7 @@ import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.c
 import { AdminsComponent } from './admin-page/tabs/account/admins/admins.component';
 import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admins/permission/permission-granted-modal/permission-granted-modal.component';
 import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
+import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
 
 
 
@@ -86,6 +87,7 @@ import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon
     CouponsComponent,
     PermissionGrantedModalComponent,
     CouponFormComponent,
+    AdminIndexComponent,
   ],
   imports: [
     ReactiveFormsModule,
