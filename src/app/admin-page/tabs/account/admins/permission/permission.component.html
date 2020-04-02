@@ -21,8 +21,8 @@
                         <nb-checkbox status="danger" [disabled]="!this.grantPermissionForm.valid"
                             (click)="this.userAgree()">I know what I am doing</nb-checkbox>
                     </div>
-                    <button [disabled]="!this.grantPermissionForm.valid" (click)="this.proceedGrantPermission()"
-                        nbButton hero status="danger">Grant</button>
+                    <button [disabled]="!this.grantPermissionForm.valid || !this.checked"
+                        (click)="this.proceedGrantPermission()" nbButton hero status="danger">Grant</button>
                 </form>
             </nb-card-body>
         </nb-card>

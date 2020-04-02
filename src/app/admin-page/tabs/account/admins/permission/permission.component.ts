@@ -33,6 +33,7 @@ export class PermissionComponent implements OnInit {
 
   public userAgree() {
     this.checked = !this.checked;
+    console.log('checked')
   }
 
   public proceedGrantPermission() {
