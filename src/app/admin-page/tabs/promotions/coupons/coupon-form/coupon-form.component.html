@@ -1,4 +1,4 @@
-<div class="row" *ngIf="couponForm">
+<div class="row" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}" *ngIf="couponForm">
     <div class="col-10 col-sm-10 col-md-6 col-lg-4 col-xl-3 m-auto">
         <nb-card>
             <nb-card-body class="coupon-form-col">
@@ -7,8 +7,8 @@
                         <div class="form-group">
 
                             <label>New Coupon</label>
-                            <input type="text" nbInput fullWidth status="primary" placeholder="SUMMERISHERE"
-                                formControlName="coupon" required placeholder="coupon" [readonly]="this.notEditable"
+                            <input type="text" nbInput fullWidth status="primary" formControlName="coupon" required
+                                placeholder="SUMMERISHERE" [readonly]="this.notEditable"
                                 oninput="this.value = this.value.toUpperCase(); ">
                             <mat-error *ngIf="this.couponForm['controls']
   .coupon.hasError('existCoupon')">
@@ -42,12 +42,14 @@
 
                         <div class="form-group">
                             <label>Free Shipping</label>
-                            <div class="row m-auto">
+                            <nb-radio-group formControlName="freeShipping">
+                                <!-- <div class="row m-auto"> -->
                                 <nb-radio class="col-6" *ngFor="let option of options" [checked]="option.checked"
                                     [disabled]="option.disabled" [value]="option.value">
                                     {{ option.label }}
                                 </nb-radio>
-                            </div>
+                                <!-- </div> -->
+                            </nb-radio-group>
                         </div>
 
                         <div class="form-group">
@@ -55,7 +57,7 @@
                             <input type="number" formControlName="minimumSpend" required placeholder="Minimum Spend"
                                 nbInput fullWidth status="primary" placeholder="200">
                         </div>
-                        <button type="submit" [disabled]="!couponForm.valid">Submit</button>
+                        <button nbButton hero status="success" type="submit" [disabled]="!couponForm.valid">Add</button>
                     </div>
                 </form>
             </nb-card-body>

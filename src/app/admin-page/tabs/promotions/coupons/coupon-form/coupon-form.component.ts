@@ -12,6 +12,7 @@ import { CouponsService } from 'src/app/services/coupons/coupons.service';
 })
 
 export class CouponFormComponent implements OnInit {
+  public loading = false;
   public couponForm: FormGroup;
   public couponName: string;
   public coupon: Coupon;
@@ -40,9 +41,16 @@ export class CouponFormComponent implements OnInit {
   }
 
   public onSubmit(cf: FormGroup) {
-    this.cs.addCoupon(cf.value).then(result => console.log(result)).catch(error => console.error(error));
-    this.router.navigate(['/admin/coupons']).then(r => console.log('why i am here'));
-    this.resetForm();
+    this.loading = true;
+    this.cs.addCoupon(cf.value).then(result => {
+      setTimeout(() => {
+        this.loading = false;
+        this.router.navigate(['promotions/coupons']).then(() => { })
+        this.resetForm();
+      }, 500);
+
+    }).catch(error => console.error(error));
+
   }
 
   private resetForm() {
