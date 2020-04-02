@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: '', component: AdminPageComponent, canActivate: [AuthenticatedGuard],
     children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: AdminIndexComponent },
       /*
       * account tab
