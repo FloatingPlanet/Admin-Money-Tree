@@ -14,14 +14,6 @@ export class CouponsService {
     this.Coupons = this.db.collection('Coupons', ref => ref.orderBy('addedAt'));
   }
 
-  public loadCoupons(): Promise<Coupon[]> {
-    return new Promise((resolve) => {
-      this.Coupons.valueChanges().subscribe((coupons) => {
-        resolve(coupons);
-      })
-    })
-  }
-
   /*
   return coupons observable
    */

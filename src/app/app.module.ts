@@ -17,6 +17,8 @@ import {
   NbMenuModule,
   NbListModule,
   NbMenuService,
+  NbDialogService,
+  NbDialogModule
 } from '@nebular/theme';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -69,6 +71,7 @@ import { AngularFireModule } from '@angular/fire';
 import { PermissionComponent } from './admin-page/tabs/account/admins/permission/permission.component';
 import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.component';
 import { AdminsComponent } from './admin-page/tabs/account/admins/admins.component';
+import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admins/permission/permission-granted-modal/permission-granted-modal.component';
 
 
 
@@ -80,6 +83,7 @@ import { AdminsComponent } from './admin-page/tabs/account/admins/admins.compone
     PermissionComponent,
     AdminsComponent,
     CouponsComponent,
+    PermissionGrantedModalComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -124,6 +128,7 @@ import { AdminsComponent } from './admin-page/tabs/account/admins/admins.compone
     NbSidebarModule.forRoot(), // NbSidebarModule.forRoot(), //if this is your app.module
     NbButtonModule,
     NbMenuModule.forRoot(),
+    NbDialogModule.forRoot(),
     NbIconModule,
     NbListModule,
     NbCardModule,
@@ -142,6 +147,7 @@ import { AdminsComponent } from './admin-page/tabs/account/admins/admins.compone
     AuthenticatedGuard,
     NbSidebarService,
     NbMenuService,
+    NbDialogService
   ],
   bootstrap: [AppComponent]
 })

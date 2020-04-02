@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, ValidatorFn, AbstractControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
+import { NbDialogService } from '@nebular/theme';
+import { PermissionGrantedModalComponent } from './permission-granted-modal/permission-granted-modal.component';
 
 @Component({
   selector: 'app-permission',
@@ -11,7 +13,7 @@ export class PermissionComponent implements OnInit {
 
   public grantPermissionForm: FormGroup;
   public checked: boolean = false;
-  constructor(private formBuilder: FormBuilder, private us: UserService
+  constructor(private formBuilder: FormBuilder, private us: UserService, private ds: NbDialogService
   ) { }
 
   ngOnInit(): void {
@@ -37,10 +39,21 @@ export class PermissionComponent implements OnInit {
     const firstEmail = this.grantPermissionForm?.get('adminEmail1').value;
     const secondEmail = this.grantPermissionForm?.get('adminEmail2').value;
     if (firstEmail === secondEmail && firstEmail !== '' && this.checked) {
-      this.us.addAdminRole(firstEmail);
+      this.us.addAdminRole(firstEmail).then(() => {
+        this.succeedModal(secondEmail);
+        this.grantPermissionForm.reset();
+      }).catch((error) => {
+        console.error(error);
+      })
     } else {
       console.error('you naugty boy, requirements are not meet!');
     }
   }
-
+  succeedModal(email: string) {
+    this.ds.open(PermissionGrantedModalComponent, {
+      context: {
+        newAdmin: email,
+      },
+    });
+  }
 }

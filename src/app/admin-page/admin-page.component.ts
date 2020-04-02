@@ -77,6 +77,5 @@ export class AdminPageComponent implements OnInit {
   }
   public toggleSideBar() {
     this.sidebarService.toggle(true, 'menu-sidebar');
-
   }
 }

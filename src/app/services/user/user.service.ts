@@ -87,16 +87,19 @@ export class UserService {
   * grant admin permission
   */
   public addAdminRole(adminEmail: string) {
-    var functions = firebase.functions();
-
-    const grantPermission = functions.httpsCallable('grantPermission');
-    grantPermission({
-      email: adminEmail
-    }).then((res) => {
-      console.log(res);
-    }).catch((error) => {
-      console.error(error);
+    return new Promise((resolve, reject) => {
+      var functions = firebase.functions();
+      const grantPermission = functions.httpsCallable('grantPermission');
+      grantPermission({
+        email: adminEmail
+      }).then((res) => {
+        resolve();
+      }).catch((error) => {
+        console.error(error);
+        reject(error);
+      })
     })
+
   }
 
 }

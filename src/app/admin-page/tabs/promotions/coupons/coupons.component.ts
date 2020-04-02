@@ -28,14 +28,18 @@ export class CouponsComponent implements OnInit {
 
   ngOnInit() {
     this.loading = true;
-    this.cs.loadCoupons().then((coupons) => {
-      this.coupons = coupons;
-      this.dataSource = new MatTableDataSource<Coupon>(this.coupons);
-      console.log('added coupons ui')
-      this.dataSource.paginator = this.paginator;
+    const loadCoupons = new Promise((resovle) => {
+      this.couponsObservable$ = this.cs.couponsObservable.subscribe((coupons) => {
+        this.coupons = coupons;
+        this.dataSource = new MatTableDataSource<Coupon>(this.coupons);
+        this.dataSource.paginator = this.paginator;
+        resovle();
+      })
+    })
+    loadCoupons.then(() => {
       this.loading = false;
-
     });
+
 
   }
 
