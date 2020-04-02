@@ -48,7 +48,6 @@ export class UserService {
     this.thirdPartyLogin(provider).then((res) => {
       res.user.getIdTokenResult().then((user) => {
         if (user.claims.admin) {
-          this.router.navigate(['']);
         } else {
           console.error('you are not admin')
         }

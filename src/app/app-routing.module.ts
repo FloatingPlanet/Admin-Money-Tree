@@ -8,6 +8,7 @@ import { AdminsComponent } from './admin-page/tabs/account/admins/admins.compone
 import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.component';
 import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
 import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
+import { LoginPageGuard } from './login-guard/login-page.guard';
 
 
 const routes: Routes = [
@@ -31,7 +32,7 @@ const routes: Routes = [
       { path: 'promotions/coupons/modify/:coupon', component: CouponFormComponent },
     ]
   },
-  { path: 'login', component: SignInComponent }
+  { path: 'login', component: SignInComponent, canActivate: [LoginPageGuard] }
 ];
 
 @NgModule({

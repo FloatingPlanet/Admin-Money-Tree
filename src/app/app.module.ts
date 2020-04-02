@@ -75,6 +75,7 @@ import { PermissionGrantedModalComponent } from './admin-page/tabs/account/admin
 import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
 import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
 import { SplashService } from './services/splash/splash.service';
+import { LoginPageGuard } from './login-guard/login-page.guard';
 
 export function initialization(ss: SplashService) {
   return () => ss.initializeMyApp();
@@ -153,6 +154,7 @@ export function initialization(ss: SplashService) {
     UserService,
     CouponsService,
     AuthenticatedGuard,
+    LoginPageGuard,
     NbSidebarService,
     NbMenuService,
     NbDialogService,
