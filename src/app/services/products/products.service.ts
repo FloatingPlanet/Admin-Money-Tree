@@ -8,13 +8,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductsService {
   public Products: AngularFirestoreCollection<Product>; // db ref
+
+  // local observable, save reads when user switch tabs instead readsing docs from firebase(server)
   public allProducts$ = new BehaviorSubject<Product[]>([]);
 
   constructor(private db: AngularFirestore) {
     this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt'));
     this.Products.valueChanges().subscribe((docs) => {
       this.allProducts$.next(docs);
-      console.log(docs);
     })
   }
 
@@ -23,7 +24,7 @@ export class ProductsService {
 return products observable
  */
   get productsObservable() {
-    return this.allProducts$;
+    return this.allProducts$.asObservable();
   }
 
   /*

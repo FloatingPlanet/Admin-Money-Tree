@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Coupon } from 'src/app/models/coupon';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -8,17 +9,22 @@ import { Coupon } from 'src/app/models/coupon';
 })
 export class CouponsService {
   private Coupons: AngularFirestoreCollection<Coupon>;
-  public allCoupons: Coupon[] = [];
+  // local observable, save reads when user switch tabs instead readsing docs from firebase(server)
+  public allCoupons$ = new BehaviorSubject<Coupon[]>([]);
 
   constructor(private db: AngularFirestore) {
     this.Coupons = this.db.collection('Coupons', ref => ref.orderBy('addedAt'));
+    this.Coupons.valueChanges().subscribe((docs) => {
+      this.allCoupons$.next(docs);
+    })
+
   }
 
   /*
   return coupons observable
    */
   get couponsObservable() {
-    return this.Coupons.valueChanges();
+    return this.allCoupons$.asObservable();
   }
 
   /*
