@@ -1,6 +1,6 @@
 export class Product {
     SKU: string;
-    productId: number;
+    productId: string;
     productName: string;
     productCategory: [string];
     productSummary?: string;
@@ -15,7 +15,7 @@ export class Product {
 
     constructor() {
         this.SKU = '';
-        this.productId = 0;
+        this.productId = '';
         this.productName = '';
         this.productCategory = [''];
         this.productPrice = 0;

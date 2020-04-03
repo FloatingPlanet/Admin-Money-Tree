@@ -77,9 +77,9 @@ import { AdminIndexComponent } from './admin-page/admin-index/admin-index.compon
 import { SplashService } from './services/splash/splash.service';
 import { LoginPageGuard } from './login-guard/login-page.guard';
 import { ProductsComponent } from './admin-page/tabs/collectinos/products/products.component';
-import { CategoryFormComponent } from './admin-page/tabs/collectinos/products/modify-product/category-form/category-form.component';
-import { ProductFormComponent } from './admin-page/tabs/collectinos/products/modify-product/product-form/product-form.component';
-import { ModifyProductComponent } from './admin-page/tabs/collectinos/products/modify-product/modify-product.component';
+
+import { ProductFormComponent } from './admin-page/tabs/collectinos/products/product-form/product-form.component';
+
 
 export function initialization(ss: SplashService) {
   return () => ss.initializeMyApp();
@@ -97,9 +97,8 @@ export function initialization(ss: SplashService) {
     CouponFormComponent,
     AdminIndexComponent,
     ProductsComponent,
-    CategoryFormComponent,
     ProductFormComponent,
-    ModifyProductComponent
+
   ],
   imports: [
     ReactiveFormsModule,

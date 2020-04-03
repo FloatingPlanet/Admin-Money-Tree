@@ -10,8 +10,7 @@ import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon
 import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
 import { LoginPageGuard } from './login-guard/login-page.guard';
 import { ProductsComponent } from './admin-page/tabs/collectinos/products/products.component';
-import { ProductFormComponent } from './admin-page/tabs/collectinos/products/modify-product/product-form/product-form.component';
-import { ModifyProductComponent } from './admin-page/tabs/collectinos/products/modify-product/modify-product.component';
+import { ProductFormComponent } from './admin-page/tabs/collectinos/products/product-form/product-form.component';
 
 
 const routes: Routes = [
@@ -31,8 +30,8 @@ const routes: Routes = [
       * collections tab
       */
       { path: 'collections/products', component: ProductsComponent },
-      { path: 'collections/products/add', component: ModifyProductComponent },
-      { path: 'collections/modify/:SKU', component: ModifyProductComponent },
+      { path: 'collections/products/add', component: ProductFormComponent },
+      { path: 'collections/modify/:SKU', component: ProductFormComponent },
 
       /*
       * promotions tab

@@ -1,8 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormArray, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/models/category';
+import { Subscription } from 'rxjs';
+import { CategoryService } from 'src/app/services/category/category.service';
 
 @Component({
   selector: 'app-product-form',
@@ -10,17 +13,26 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-form.component.scss']
 })
 
-export class ProductFormComponent implements OnInit {
-
-  @Output() public formModified = new EventEmitter<FormGroup>();
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   public SKU: string;
   public productForm: FormGroup;
+  public categoryForm: FormGroup;
+
   public product: Product;
   public notEditable = false;
   public imagesUrls = [];
+  public allCategories: Category[];
+  private categoriesObservable$: Subscription;
+  public succeeded = false;
+  public selectedCats = [];
 
-  constructor(private formBuilder: FormBuilder, private ps: ProductsService, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private cs: CategoryService, private ps: ProductsService, private route: ActivatedRoute) {
+
+  }
+
+
+  ngOnInit() {
     this.initForm();
     this.SKU = this.route.snapshot.paramMap.get('SKU');
     if (this.SKU) {
@@ -49,23 +61,23 @@ export class ProductFormComponent implements OnInit {
         console.log(this.getProductImageUrls);
       }).catch(error => console.error(error));
     }
+    this.categoriesObservable$ = this.cs.categoriesObservableAdmin.subscribe((res) => {
+      this.allCategories = res;
+    });
   }
 
-
-  ngOnInit() {
+  public onSubmitProduct() {
+    this.ps.addProduct(this.productForm.value).then(() => {
+      console.log('product added');
+    });
   }
 
-
-  onSubmit(fg: FormGroup) {
-    this.formModified.emit(fg);
-  }
-
-  initForm() {
+  private initForm() {
     this.productForm = this.formBuilder.group({
       SKU: [null, Validators.required],
       productId: [null, Validators.required],
       productName: [null, Validators.required],
-      productCategory: [],
+      productCategory: [[]],
       productSummary: null,
       productPrice: [null, Validators.required],
       productDescription: [null, Validators.required],
@@ -76,6 +88,10 @@ export class ProductFormComponent implements OnInit {
       ratings: [null, Validators.required],
       favourite: false,
       productSeller: null,
+    });
+
+    this.categoryForm = this.formBuilder.group({
+      category: [null, [Validators.required, this.existCategory()]],
     });
   }
 
@@ -89,5 +105,29 @@ export class ProductFormComponent implements OnInit {
 
   public deleteUrl(index) {
     this.getProductImageUrls.removeAt(index);
+  }
+
+  public addNewCategory() {
+    this.succeeded = true;
+    // show loading spinner
+    this.cs.addCategory(this.categoryForm.value).then((res) => {
+      setTimeout(() => {
+        this.succeeded = false;
+      }, 300);
+    });
+    this.categoryForm.reset();
+  }
+
+  private existCategory(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const exist = this.cs.allCategories.some(x => x.category === control.value);
+      return exist ? { existCategory: { value: control.value } } : null;
+    };
+  }
+
+  ngOnDestroy(): void {
+    if (this.categoriesObservable$) {
+      this.categoriesObservable$.unsubscribe();
+    }
   }
 }
