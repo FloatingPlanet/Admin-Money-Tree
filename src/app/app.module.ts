@@ -76,6 +76,7 @@ import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon
 import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
 import { SplashService } from './services/splash/splash.service';
 import { LoginPageGuard } from './login-guard/login-page.guard';
+import { ProductsComponent } from './admin-page/tabs/collectinos/products/products.component';
 
 export function initialization(ss: SplashService) {
   return () => ss.initializeMyApp();
@@ -92,6 +93,7 @@ export function initialization(ss: SplashService) {
     PermissionGrantedModalComponent,
     CouponFormComponent,
     AdminIndexComponent,
+    ProductsComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -9,6 +9,8 @@ import { CouponsComponent } from './admin-page/tabs/promotions/coupons/coupons.c
 import { CouponFormComponent } from './admin-page/tabs/promotions/coupons/coupon-form/coupon-form.component';
 import { AdminIndexComponent } from './admin-page/admin-index/admin-index.component';
 import { LoginPageGuard } from './login-guard/login-page.guard';
+import { ProductsComponent } from './admin-page/tabs/collectinos/products/products.component';
+import { ProductFormComponent } from './admin-page/tabs/collectinos/products/product-form/product-form.component';
 
 
 const routes: Routes = [
@@ -25,7 +27,14 @@ const routes: Routes = [
       { path: 'accounts/admins/permission', component: PermissionComponent },
 
       /*
-      * promotions
+      * collections tab
+      */
+      { path: 'collections/products', component: ProductsComponent },
+      { path: 'collections/add', component: ProductFormComponent },
+      { path: 'collections/modify/:SKU', component: ProductFormComponent },
+
+      /*
+      * promotions tab
       */
       { path: 'promotions/coupons', component: CouponsComponent },
       { path: 'promotions/coupons/add', component: CouponFormComponent },
