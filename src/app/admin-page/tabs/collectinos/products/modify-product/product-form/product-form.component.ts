@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventEmitter } from 'protractor';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Product } from 'src/app/models/product';
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -10,9 +9,9 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
+
 export class ProductFormComponent implements OnInit {
 
-  @Input() succeeded: boolean;
   @Output() public formModified = new EventEmitter<FormGroup>();
 
   public SKU: string;

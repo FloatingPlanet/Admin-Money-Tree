@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
+
 import { ProductsService } from 'src/app/services/products/products.service';
 
 @Component({
