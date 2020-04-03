@@ -1,1 +1,66 @@
-<p>product-form works!</p>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm)">
+    <div class="form-container">
+        <label>
+            <mat-form-field>
+                <input matInput type="text" formControlName="SKU" required placeholder="SKU"
+                    [readonly]="this.notEditable">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="number" formControlName="productId" required placeholder="Product Id">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="text" formControlName="productName" required placeholder="Product Name">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="text" formControlName="productSummary" placeholder="Product Summary">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="number" formControlName="productPrice" required placeholder="Product Price">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="text" formControlName="productDescription" required
+                    placeholder="Product Description">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="number" formControlName="productQuantity" required placeholder="Product Quantity">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+
+                <input matInput type="number" formControlName="ratings" required placeholder="Ratings">
+            </mat-form-field>
+        </label>
+        <label>
+            <mat-form-field>
+                <input matInput type="text" formControlName="productSeller" placeholder="Product Seller" value="NA">
+            </mat-form-field>
+        </label> <label>
+            <div formArrayName="productImageUrls">
+                <div *ngFor="let url of getProductImageUrls.controls; let urlIndex = index" [formGroupName]="urlIndex">
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="url" placeholder="Product Image Url" value="NA">
+                    </mat-form-field>
+                </div>
+                <button type="button" (click)="addUrl()">Add Url</button>
+
+            </div>
+        </label>
+        <!--    <p>-->
+        <!--      {{ productForm.value | json }}-->
+        <!--    </p>-->
+        <button type="submit" [disabled]="!productForm.valid">Submit</button>
+    </div>
+</form>

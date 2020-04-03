@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Product } from 'src/app/models/product';
 import { BehaviorSubject } from 'rxjs';
+import { CategoryService } from '../category/category.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProductsService {
   // local observable, save reads when user switch tabs instead readsing docs from firebase(server)
   public allProducts$ = new BehaviorSubject<Product[]>([]);
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private cs: CategoryService) {
     this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt'));
     this.Products.valueChanges().subscribe((docs) => {
       this.allProducts$.next(docs);
@@ -26,6 +27,29 @@ return products observable
   get productsObservable() {
     return this.allProducts$.asObservable();
   }
+
+  /*
+  * add product to server
+  */
+  public addProduct(product: Product) {
+    return new Promise((resolve, reject) => {
+      product.productSummary = product.productCategory.join(' ');
+      this.Products.doc(product.SKU).ref.get().then(() => {
+        this.Products.doc(product.SKU)
+          .set(product)
+          .catch(error => {
+            console.error(error);
+            reject('Add product failed');
+          });
+        resolve(`doc ${product.SKU} added`);
+        product.productCategory.forEach(c => this.cs.addProductToCategory(c, product));
+      }).catch((error) => {
+        console.error(error);
+        reject(`fetch doc ${product.SKU} failed`);
+      });
+    });
+  }
+
 
   /*
   delete @sku from firebase

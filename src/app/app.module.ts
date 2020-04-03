@@ -79,6 +79,7 @@ import { LoginPageGuard } from './login-guard/login-page.guard';
 import { ProductsComponent } from './admin-page/tabs/collectinos/products/products.component';
 import { CategoryFormComponent } from './admin-page/tabs/collectinos/products/modify-product/category-form/category-form.component';
 import { ProductFormComponent } from './admin-page/tabs/collectinos/products/modify-product/product-form/product-form.component';
+import { ModifyProductComponent } from './admin-page/tabs/collectinos/products/modify-product/modify-product.component';
 
 export function initialization(ss: SplashService) {
   return () => ss.initializeMyApp();
@@ -97,7 +98,8 @@ export function initialization(ss: SplashService) {
     AdminIndexComponent,
     ProductsComponent,
     CategoryFormComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ModifyProductComponent
   ],
   imports: [
     ReactiveFormsModule,
