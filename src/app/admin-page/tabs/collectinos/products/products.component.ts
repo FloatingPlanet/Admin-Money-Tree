@@ -29,8 +29,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     const loadProducts = new Promise((resolve) => {
-      this.productsObservable$ = this.ps.productsObservableAdmin.subscribe((res) => {
-        this.products = res;
+      this.productsObservable$ = this.ps.productsObservable.subscribe((docs) => {
+        this.products = docs;
         this.dataSource = new MatTableDataSource<Product>(this.products);
         this.dataSource.paginator = this.paginator;
         resolve();

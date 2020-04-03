@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Product } from 'src/app/models/product';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
   public Products: AngularFirestoreCollection<Product>; // db ref
+  public allProducts$ = new BehaviorSubject<Product[]>([]);
 
   constructor(private db: AngularFirestore) {
     this.Products = db.collection('Products', ref => ref.orderBy('productAddedAt'));
+    this.Products.valueChanges().subscribe((docs) => {
+      this.allProducts$.next(docs);
+      console.log(docs);
+    })
   }
 
 
   /*
 return products observable
  */
-  get productsObservableAdmin() {
-    return this.Products.valueChanges();
+  get productsObservable() {
+    return this.allProducts$;
   }
 
   /*
