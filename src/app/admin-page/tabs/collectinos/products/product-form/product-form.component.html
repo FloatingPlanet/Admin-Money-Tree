@@ -1,142 +1,143 @@
-<nb-card>
-    <nb-card-header>Edit Product</nb-card-header>
-    <nb-card-body class="product-form-col">
-        <form [formGroup]="productForm" (ngSubmit)="onSubmitProduct()">
-            <div class="form-container">
-                <!-- product name; sku; product id;product price; product quantity; ratings -->
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>Name*</label>
-                            <input type="text" formControlName="productName" required placeholder="Product Name" nbInput
-                                fullWidth status="primary">
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>SKU*</label>
-                            <input type="text" nbInput fullWidth status="primary" formControlName="SKU" required
-                                placeholder="SKU" [readonly]="this.notEditable">
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>ID*</label>
-                            <input type="text" nbInput fullWidth status="primary" formControlName="productId" required
-                                placeholder="Product ID">
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>Price*</label>
-                            <input type="number" min="0" nbInput fullWidth status="primary"
-                                formControlName="productPrice" required placeholder="Product Price">
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>Quantity*</label>
-                            <input type="number" min="0" nbInput fullWidth status="primary"
-                                formControlName="productQuantity" required placeholder="Product Quantity">
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>Ratings*</label>
-                            <input type="number" min="0" nbInput fullWidth status="primary" formControlName="ratings"
-                                required placeholder="Ratings">
-                        </div>
-                    </div>
-                </div>
-                <!-- end product name; sku; product id;product price; product quantity; ratings -->
-                <!-- categories section -->
-                <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <div class="category-list justify-content-center">
-                                <label>Categories*</label>
-                                <nb-select multiple hero status="info" formControlName="productCategory"
-                                    placeholder="Pick Categories">
-                                    <nb-option *ngFor="let category of this.allCategories" [value]="category.category">
-                                        {{ category.category }}
-                                    </nb-option>
-                                </nb-select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <form [formGroup]="categoryForm" (ngSubmit)="addNewCategory()">
-                            <label>Add New Category</label>
-                            <input type="text" nbInput small status="warning" formControlName="category"
-                                placeholder="New Category">
-                            <button type="submit" ghost nbButton status="success" *ngIf="categoryForm.valid">
-                                <nb-icon icon="checkmark-circle-outline"></nb-icon>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <!-- end categories section -->
-                <!-- Product Description;Product Summary  -->
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Description*</label>
-                            <textarea nbInput fullWidth formControlName="productDescription" required
-                                placeholder="Product Description"></textarea>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Summary</label>
-                            <textarea nbInput fullWidth formControlName="productSummary"
-                                placeholder="Product Summary"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <!-- end Product Description;Product Summary  -->
-
-                <!-- seller -->
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <label>Seller</label>
-                            <input type="text" nbInput fullWidth status="primary" formControlName="productSeller"
-                                placeholder="Product Seller" value="NA">
-                        </div>
-                    </div>
-                </div>
-                <!-- end seller -->
-
-                <!-- add image urls -->
-                <div class="form-group">
-                    <div formArrayName="productImageUrls">
+<div class="row">
+    <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-lg-6 m-auto">
+        <nb-card>
+            <nb-card-header>Edit Product</nb-card-header>
+            <nb-card-body class="product-form-col">
+                <form [formGroup]="productForm" (ngSubmit)="onSubmitProduct()">
+                    <div class="form-container">
+                        <!-- product name; sku; product id;product price; product quantity; ratings -->
                         <div class="row">
-                            <div class="col-9">
-                                <div *ngFor="let url of getProductImageUrls.controls; let urlIndex = index"
-                                    [formGroupName]="urlIndex">
-                                    <label>Image Url*</label>
-                                    <input type="text" nbInput fullWidth status="primary" formControlName="url"
-                                        placeholder="Product Image Url" value="NA">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Name*</label>
+                                    <input type="text" formControlName="productName" required placeholder="Product Name"
+                                        nbInput fullWidth status="primary">
                                 </div>
                             </div>
-                            <div class="col-3">
-                                <div class="d-flex justify-content-center stick-bottom">
-                                    <button nbButton type="button" status="warning" (click)="addUrl()">
-                                        <nb-icon icon="plus-circle-outline"></nb-icon>
-                                    </button>
+
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>SKU*</label>
+                                    <input type="text" nbInput fullWidth status="primary" formControlName="SKU" required
+                                        placeholder="SKU" [readonly]="this.notEditable">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>ID*</label>
+                                    <input type="text" nbInput fullWidth status="primary" formControlName="productId"
+                                        required placeholder="Product ID">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Price*</label>
+                                    <input type="number" min="0" nbInput fullWidth status="primary"
+                                        formControlName="productPrice" required placeholder="Product Price">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Quantity*</label>
+                                    <input type="number" min="0" nbInput fullWidth status="primary"
+                                        formControlName="productQuantity" required placeholder="Product Quantity">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Ratings*</label>
+                                    <input type="number" min="0" max="10" nbInput fullWidth status="primary"
+                                        formControlName="ratings" required placeholder="6/10">
                                 </div>
                             </div>
                         </div>
+                        <!-- end product name; sku; product id;product price; product quantity; ratings -->
+                        <!-- categories section -->
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <div class="category-list justify-content-center">
+                                        <nb-select multiple fullWidth hero status="info"
+                                            formControlName="productCategory" placeholder="Pick Categories">
+                                            <label>Categories*</label>
+                                            <nb-option *ngFor="let category of this.allCategories"
+                                                [value]="category.category">
+                                                {{ category.category }}
+                                            </nb-option>
+                                        </nb-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" ghost nbButton status="warning" (click)="openAddCategoryWindow()">
+                                    <nb-icon icon="plus-circle-outline"></nb-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- end categories section -->
+                        <!-- Product Description;Product Summary  -->
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Description*</label>
+                                    <textarea nbInput fullWidth formControlName="productDescription" required
+                                        placeholder="Product Description"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Summary</label>
+                                    <textarea nbInput fullWidth formControlName="productSummary"
+                                        placeholder="Product Summary"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end Product Description;Product Summary  -->
+
+                        <!-- seller -->
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>Seller</label>
+                                    <input type="text" nbInput fullWidth status="primary"
+                                        formControlName="productSeller" placeholder="Product Seller" value="NA">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end seller -->
+
+                        <!-- add image urls -->
+                        <div class="form-group">
+                            <div formArrayName="productImageUrls">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <div *ngFor="let url of getProductImageUrls.controls; let urlIndex = index"
+                                            [formGroupName]="urlIndex">
+                                            <label>Image Url*</label>
+                                            <input type="text" nbInput fullWidth status="primary" formControlName="url"
+                                                placeholder="Product Image Url" value="NA">
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="d-flex justify-content-center stick-bottom">
+                                            <button ghost nbButton type="button" status="warning" (click)="addUrl()">
+                                                <nb-icon icon="plus-circle-outline"></nb-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end add image urls -->
+
+                        <button nbButton hero status="success" type="submit"
+                            [disabled]="!productForm.valid">Submit</button>
                     </div>
-                </div>
-                <!-- end add image urls -->
+                </form>
 
-                <button nbButton hero status="success" type="submit" [disabled]="!productForm.valid">Submit</button>
-            </div>
-        </form>
-
-    </nb-card-body>
-</nb-card>
-{{productForm.value | json}}
+            </nb-card-body>
+        </nb-card>
+        {{productForm.value | json}}
+    </div>
+</div>

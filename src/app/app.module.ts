@@ -18,7 +18,9 @@ import {
   NbListModule,
   NbMenuService,
   NbDialogService,
-  NbDialogModule
+  NbDialogModule,
+  NbWindowService,
+  NbWindowModule
 } from '@nebular/theme';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -79,6 +81,7 @@ import { LoginPageGuard } from './login-guard/login-page.guard';
 import { ProductsComponent } from './admin-page/tabs/collectinos/products/products.component';
 
 import { ProductFormComponent } from './admin-page/tabs/collectinos/products/product-form/product-form.component';
+import { AddCategoryComponent } from './admin-page/tabs/collectinos/products/product-form/add-category/add-category.component';
 
 
 export function initialization(ss: SplashService) {
@@ -98,6 +101,7 @@ export function initialization(ss: SplashService) {
     AdminIndexComponent,
     ProductsComponent,
     ProductFormComponent,
+    AddCategoryComponent,
 
   ],
   imports: [
@@ -155,6 +159,7 @@ export function initialization(ss: SplashService) {
     NbSelectModule,
     NbUserModule,
     NbRadioModule,
+    NbWindowModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
   providers: [
@@ -165,6 +170,7 @@ export function initialization(ss: SplashService) {
     NbSidebarService,
     NbMenuService,
     NbDialogService,
+    NbWindowService,
     {
       provide: APP_INITIALIZER,
       useFactory: initialization,

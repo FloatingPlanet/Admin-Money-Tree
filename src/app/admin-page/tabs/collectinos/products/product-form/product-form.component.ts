@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/models/category';
 import { Subscription } from 'rxjs';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { NbWindowService } from '@nebular/theme';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @Component({
   selector: 'app-product-form',
@@ -17,17 +19,15 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
   public SKU: string;
   public productForm: FormGroup;
-  public categoryForm: FormGroup;
 
   public product: Product;
   public notEditable = false;
   public imagesUrls = [];
   public allCategories: Category[];
   private categoriesObservable$: Subscription;
-  public succeeded = false;
   public selectedCats = [];
 
-  constructor(private formBuilder: FormBuilder, private cs: CategoryService, private ps: ProductsService, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private cs: CategoryService, private ps: ProductsService, private route: ActivatedRoute, private ws: NbWindowService) {
 
   }
 
@@ -90,9 +90,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       productSeller: null,
     });
 
-    this.categoryForm = this.formBuilder.group({
-      category: [null, [Validators.required, this.existCategory()]],
-    });
+
   }
 
   get getProductImageUrls() {
@@ -107,22 +105,9 @@ export class ProductFormComponent implements OnInit, OnDestroy {
     this.getProductImageUrls.removeAt(index);
   }
 
-  public addNewCategory() {
-    this.succeeded = true;
-    // show loading spinner
-    this.cs.addCategory(this.categoryForm.value).then((res) => {
-      setTimeout(() => {
-        this.succeeded = false;
-      }, 300);
-    });
-    this.categoryForm.reset();
-  }
 
-  private existCategory(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      const exist = this.cs.allCategories.some(x => x.category === control.value);
-      return exist ? { existCategory: { value: control.value } } : null;
-    };
+  public openAddCategoryWindow() {
+    this.ws.open(AddCategoryComponent, { title: `Window` });
   }
 
   ngOnDestroy(): void {

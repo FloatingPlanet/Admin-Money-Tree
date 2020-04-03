@@ -1,0 +1,7 @@
+<form [formGroup]="categoryForm" (ngSubmit)="addNewCategory()">
+    <label>Add New Category</label>
+    <input type="text" nbInput small status="warning" formControlName="category" placeholder="New Category">
+    <button type="submit" ghost nbButton status="success" *ngIf="categoryForm.valid">
+        <nb-icon icon="checkmark-circle-outline"></nb-icon>
+    </button>
+</form>
