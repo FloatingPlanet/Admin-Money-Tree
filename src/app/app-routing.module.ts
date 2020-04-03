@@ -30,7 +30,7 @@ const routes: Routes = [
       * collections tab
       */
       { path: 'collections/products', component: ProductsComponent },
-      { path: 'collections/add', component: ProductFormComponent },
+      { path: 'collections/products/add', component: ProductFormComponent },
       { path: 'collections/modify/:SKU', component: ProductFormComponent },
 
       /*
