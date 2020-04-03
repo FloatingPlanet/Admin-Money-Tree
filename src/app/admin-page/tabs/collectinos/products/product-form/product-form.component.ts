@@ -61,7 +61,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
         console.log(this.getProductImageUrls);
       }).catch(error => console.error(error));
     }
-    this.categoriesObservable$ = this.cs.categoriesObservableAdmin.subscribe((res) => {
+    this.categoriesObservable$ = this.cs.categoriesObservable.subscribe((res) => {
       this.allCategories = res;
     });
   }
@@ -107,7 +107,7 @@ export class ProductFormComponent implements OnInit, OnDestroy {
 
 
   public openAddCategoryWindow() {
-    this.ws.open(AddCategoryComponent, { title: `Window` });
+    this.ws.open(AddCategoryComponent, { title: `Add New Category`, context: { allCategories: this.allCategories } });
   }
 
   ngOnDestroy(): void {

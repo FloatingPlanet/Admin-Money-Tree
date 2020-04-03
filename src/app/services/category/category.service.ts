@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Product } from 'src/app/models/product';
 import { Category } from 'src/app/models/category';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,9 @@ export class CategoryService {
   private chosenCategory: string;
   // query for lazing loading
 
-  // all categories
-  public allCategories = [];
+  // all categories observable
+  public allCategories$ = new BehaviorSubject<Category[]>([]);
+
   // products for chosen category
   public chosenCategoryProducts: Product[] = [];
   public loading = false;
@@ -37,15 +39,8 @@ export class CategoryService {
 
   constructor(private db: AngularFirestore) {
     this.CategoriesCollection = db.collection('Categories');
-    this.loadCategories();
-  }
-
-  /*
-  retrieve all categories from firebase
-   */
-  public loadCategories() {
-    this.categoriesObservableAdmin.subscribe((data) => {
-      this.allCategories = data;
+    this.CategoriesCollection.valueChanges().subscribe((docs) => {
+      this.allCategories$.next(docs);
     });
   }
 
@@ -115,8 +110,8 @@ retrieve specific products based on given category with @limit
   /*
   return categories observable
    */
-  get categoriesObservableAdmin() {
-    return this.CategoriesCollection.valueChanges();
+  get categoriesObservable() {
+    return this.allCategories$.asObservable();
   }
 
   /*
@@ -147,6 +142,4 @@ retrieve specific products based on given category with @limit
       console.error(error);
     });
   }
-
-
 }

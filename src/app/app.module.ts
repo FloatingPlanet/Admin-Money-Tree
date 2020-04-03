@@ -20,7 +20,9 @@ import {
   NbDialogService,
   NbDialogModule,
   NbWindowService,
-  NbWindowModule
+  NbWindowModule,
+  NbToastrService,
+  NbToastrModule
 } from '@nebular/theme';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -159,6 +161,7 @@ export function initialization(ss: SplashService) {
     NbSelectModule,
     NbUserModule,
     NbRadioModule,
+    NbToastrModule.forRoot(),
     NbWindowModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
@@ -171,6 +174,7 @@ export function initialization(ss: SplashService) {
     NbMenuService,
     NbDialogService,
     NbWindowService,
+    NbToastrService,
     {
       provide: APP_INITIALIZER,
       useFactory: initialization,

@@ -1,7 +1,17 @@
-<form [formGroup]="categoryForm" (ngSubmit)="addNewCategory()">
-    <label>Add New Category</label>
-    <input type="text" nbInput small status="warning" formControlName="category" placeholder="New Category">
-    <button type="submit" ghost nbButton status="success" *ngIf="categoryForm.valid">
-        <nb-icon icon="checkmark-circle-outline"></nb-icon>
-    </button>
-</form>
+<nb-card size="medium" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}">
+    <nb-card-header>
+        Existing Categories
+    </nb-card-header>
+    <nb-list>
+        <nb-list-item *ngFor="let cat of allCategories">
+            {{ cat.category }}
+        </nb-list-item>
+    </nb-list>
+    <form [formGroup]="categoryForm" (ngSubmit)="addNewCategory()">
+        <input type="text" nbInput small status="warning" formControlName="category" placeholder="New Category">
+        <button type="submit" ghost nbButton status="success" [disabled]="!categoryForm.valid">
+            <nb-icon icon="checkmark-circle-outline"></nb-icon>
+        </button>
+    </form>
+</nb-card>
+<p>You cannot add deplicated category</p>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidatorFn, AbstractControl, Validators, FormBuilder } from '@angular/forms';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { NbWindowRef, NbToastrService, NbGlobalPosition, NbGlobalPhysicalPosition } from '@nebular/theme';
 
 @Component({
   selector: 'app-add-category',
@@ -8,10 +9,11 @@ import { CategoryService } from 'src/app/services/category/category.service';
   styleUrls: ['./add-category.component.scss']
 })
 export class AddCategoryComponent implements OnInit {
+  @Input() allCategories;
   public categoryForm: FormGroup;
   public loading = false;
 
-  constructor(private formBuilder: FormBuilder, private cs: CategoryService, ) { }
+  constructor(private formBuilder: FormBuilder, private cs: CategoryService, private ref: NbWindowRef, private ts: NbToastrService) { }
 
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
@@ -21,18 +23,20 @@ export class AddCategoryComponent implements OnInit {
 
   public addNewCategory() {
     this.loading = true;
-    // show loading spinner
-    this.cs.addCategory(this.categoryForm.value).then((res) => {
+    this.cs.addCategory(this.categoryForm.value).then(() => {
       setTimeout(() => {
         this.loading = false;
+        this.ts.show(`Add category "${this.categoryForm.get('category').value}" succeded!`,
+          'Add new category:',
+          { position: NbGlobalPhysicalPosition.TOP_RIGHT, status: 'success', duration: 5000 });
+        this.ref.close();
       }, 300);
     });
-    this.categoryForm.reset();
   }
 
   private existCategory(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      const exist = this.cs.allCategories.some(x => x.category === control.value);
+      const exist = [].some(x => x.category === control.value);
       return exist ? { existCategory: { value: control.value } } : null;
     };
   }
