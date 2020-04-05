@@ -54,7 +54,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
             productSummary: this.product.productSummary,
             productPrice: this.product.productPrice,
             productDescription: this.product.productDescription,
-            productAddedAt: this.product.productAddedAt,
             productQuantity: this.product.productQuantity,
             ratings: this.product.ratings,
             favourite: this.product.favourite,
@@ -95,7 +94,6 @@ export class ProductFormComponent implements OnInit, OnDestroy {
       productDescription: [null, Validators.required],
       productImageUrls: this.formBuilder.array(
         [this.formBuilder.group({ url: '' })]),
-      productAddedAt: new Date(),
       productQuantity: [null, [Validators.required, Validators.pattern('\\d*')]],
       ratings: [null, Validators.required],
       favourite: false,

@@ -7,65 +7,67 @@
             <button nbButton hero status="danger" (click)="deleteProducts()">Delete</button>
             <input type="text" class=" float-right" nbInput medium (keyup)="applyFilter($event.target.value)"
                 status="primary" placeholder="Filter">
+            <div class='table-responsive '>
 
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="SKU">
+                        <th mat-header-cell *matHeaderCellDef> SKU</th>
+                        <td mat-cell *matCellDef="let a"> {{a.SKU}} </td>
+                    </ng-container>
 
-                <!-- Checkbox Column -->
-                <ng-container matColumnDef="select">
-                    <th mat-header-cell *matHeaderCellDef>
-                        <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                        </mat-checkbox>
-                    </th>
-                    <td mat-cell *matCellDef="let row">
-                        <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
-                            [aria-label]="checkboxLabel(row)">
-                        </mat-checkbox>
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="SKU">
-                    <th mat-header-cell *matHeaderCellDef> SKU</th>
-                    <td mat-cell *matCellDef="let a"> {{a.SKU}} </td>
-                </ng-container>
+                    <ng-container matColumnDef="productName">
+                        <th mat-header-cell *matHeaderCellDef> Product Name</th>
+                        <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+                    </ng-container>
 
-                <ng-container matColumnDef="productName">
-                    <th mat-header-cell *matHeaderCellDef> Product Name</th>
-                    <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
-                </ng-container>
+                    <ng-container matColumnDef="productPrice">
+                        <th mat-header-cell *matHeaderCellDef> Product Price</th>
+                        <td mat-cell *matCellDef="let element"> {{element.productPrice}} </td>
+                    </ng-container>
 
-                <ng-container matColumnDef="productPrice">
-                    <th mat-header-cell *matHeaderCellDef> Product Price</th>
-                    <td mat-cell *matCellDef="let element"> {{element.productPrice}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="productQuantity">
-                    <th mat-header-cell *matHeaderCellDef> Quantity</th>
-                    <td mat-cell *matCellDef="let element"> {{element.productQuantity}} </td>
-                </ng-container>
-                <ng-container matColumnDef="productCategory">
-                    <th mat-header-cell *matHeaderCellDef> Category</th>
-                    <td mat-cell *matCellDef="let element"> {{element.productCategory.join(', ')}} </td>
-                </ng-container>
-                <ng-container matColumnDef="productAddedAt">
-                    <th mat-header-cell *matHeaderCellDef> Date</th>
-                    <td mat-cell *matCellDef="let element">
-                        {{element.productAddedAt.seconds}}
-                    </td>
-                </ng-container>
-                <ng-container matColumnDef="edit">
-                    <th mat-header-cell *matHeaderCellDef> Edit</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button [routerLink]="['./modify',element.SKU]" mat-icon-button aria-label="edit product">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="cols"></tr>
-                <tr mat-row *matRowDef="let row; columns: cols;">
-                </tr>
-            </table>
+                    <ng-container matColumnDef="productQuantity">
+                        <th mat-header-cell *matHeaderCellDef> Quantity</th>
+                        <td mat-cell *matCellDef="let element"> {{element.productQuantity}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="productCategory">
+                        <th mat-header-cell *matHeaderCellDef> Category</th>
+                        <td mat-cell *matCellDef="let element"> {{element.productCategory.join(', ')}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="productAddedAt">
+                        <th mat-header-cell *matHeaderCellDef> Date</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{element.productAddedAt.toMillis()| date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="edit">
+                        <th mat-header-cell *matHeaderCellDef> Edit</th>
+                        <td mat-cell *matCellDef="let element">
+                            <button [routerLink]="['./modify',element.SKU]" mat-icon-button aria-label="edit product">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="cols"></tr>
+                    <tr mat-row *matRowDef="let row; columns: cols;">
+                    </tr>
+                </table>
+            </div>
             <mat-paginator [pageSizeOptions]="[20, 50, 100]" showFirstLastButtons></mat-paginator>
         </nb-card-body>
     </nb-card>

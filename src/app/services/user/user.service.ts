@@ -90,8 +90,10 @@ export class UserService {
       const functions = firebase.functions();
       const grantPermission = functions.httpsCallable('grantPermission');
       grantPermission({
-        email: adminEmail
+        granteeEmail: adminEmail,
+        granterEmail: firebase.auth().currentUser.email
       }).then((res) => {
+        console.log(res);
         resolve();
       }).catch((error) => {
         console.error(error);

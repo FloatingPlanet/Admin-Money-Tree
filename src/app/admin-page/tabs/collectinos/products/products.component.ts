@@ -5,6 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Product } from 'src/app/models/product';
 import { Subscription } from 'rxjs';
 import { ProductsService } from 'src/app/services/products/products.service';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-products',

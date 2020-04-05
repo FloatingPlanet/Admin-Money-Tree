@@ -1,3 +1,5 @@
+import * as firebase from 'firebase';
+
 export class Product {
     SKU: string;
     productId: string;
@@ -7,7 +9,8 @@ export class Product {
     productPrice: number;
     productDescription: string;
     productImageUrls: [UrlItem];
-    productAddedAt: Date;
+    productAddedAt: any;
+
     productQuantity: number;
     ratings: number;
     favourite: boolean;
@@ -21,7 +24,7 @@ export class Product {
         this.productPrice = 0;
         this.productDescription = '';
         this.productImageUrls = [new UrlItem()];
-        this.productAddedAt = new Date();
+        this.productAddedAt = firebase.firestore.Timestamp.now();
         this.productQuantity = 0;
         this.ratings = 0;
         this.favourite = false;
@@ -30,7 +33,6 @@ export class Product {
 
 export class UrlItem {
     url: string;
-
     constructor() {
         this.url = '';
     }
