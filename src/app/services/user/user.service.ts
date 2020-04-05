@@ -72,26 +72,29 @@ export class UserService {
   /*
   * end of login method
   */
-  public logInWithEmail(fg: FormGroup) {
+  public logInWithEmail(fg: FormGroup, persistence: boolean = false) {
+    const loginPersistence = persistence ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION;
     return new Promise((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(fg.value.email, fg.value.pwd).then((res) => {
-        res.user.getIdTokenResult().then((user) => {
-          if (user.claims.admin) {
-            resolve();
+      return firebase.auth().setPersistence(loginPersistence).then(() => {
+        return firebase.auth().signInWithEmailAndPassword(fg.value.email, fg.value.pwd).then((res) => {
+          res.user.getIdTokenResult().then((user) => {
+            if (user.claims.admin) {
+              resolve();
+            } else {
+              this.authenticationNotMet();
+            }
+          })
+        }).catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode === 'auth/wrong-password') {
+            alert('Wrong password.');
           } else {
-            this.authenticationNotMet();
+            alert(errorMessage);
           }
+          console.log(error);
+          reject();
         })
-      }).catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-        reject();
       })
     })
   }

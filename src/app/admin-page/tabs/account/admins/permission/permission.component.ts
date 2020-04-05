@@ -13,6 +13,9 @@ export class PermissionComponent implements OnInit {
 
   public grantPermissionForm: FormGroup;
   public checked: boolean = false;
+
+  public loading = false;
+
   constructor(private formBuilder: FormBuilder, private us: UserService, private ds: NbDialogService
   ) { }
 
@@ -37,10 +40,12 @@ export class PermissionComponent implements OnInit {
   }
 
   public proceedGrantPermission() {
+    this.loading = true;
     const firstEmail = this.grantPermissionForm?.get('adminEmail1').value;
     const secondEmail = this.grantPermissionForm?.get('adminEmail2').value;
     if (firstEmail === secondEmail && firstEmail !== '' && this.checked) {
       this.us.addAdminRole(firstEmail).then(() => {
+        this.loading = false;
         this.responseModal(secondEmail);
         this.grantPermissionForm.reset();
       }).catch((error) => {

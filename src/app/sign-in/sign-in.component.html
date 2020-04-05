@@ -1,5 +1,5 @@
 <!-- Default form login -->
-<div class="container pt-5">
+<div class="container pt-5 animated slideInUp faster">
     <div class="row align-items-center">
         <div class="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 mx-auto">
             <form class="text-center border border-light p-5" action="#!">
@@ -19,13 +19,13 @@
                         <div>
                             <!-- Remember me -->
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember"
+                                    (click)='this.rememberMe = !this.rememberMe'>
                                 <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
                             </div>
                         </div>
 
                     </div>
-                    {{this.loginForm.value| json}}
                     <!-- Sign in button -->
                     <button class="btn btn-info btn-block my-4" type="submit" [disabled]="!this.loginForm.valid">Sign
                         in</button>

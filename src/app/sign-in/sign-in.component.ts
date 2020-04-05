@@ -13,6 +13,7 @@ export class SignInComponent implements OnInit {
 
   constructor(private us: UserService, private formBuilder: FormBuilder) { }
   public adminEmail: string;
+  public rememberMe: boolean = false;
   ngOnInit() {
     this.formInit();
   }
@@ -25,8 +26,7 @@ export class SignInComponent implements OnInit {
   }
 
   public emailLogin() {
-    this.us.logInWithEmail(this.loginForm).then(() => { }).catch((error) => {
-
+    this.us.logInWithEmail(this.loginForm, this.rememberMe).then(() => { console.log(this.rememberMe) }).catch((error) => {
     });
   }
 
