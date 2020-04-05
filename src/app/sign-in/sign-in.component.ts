@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +8,26 @@ import { UserService } from '../services/user/user.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  constructor(private us: UserService) { }
+  public loginForm: FormGroup;
+
+
+  constructor(private us: UserService, private formBuilder: FormBuilder) { }
   public adminEmail: string;
   ngOnInit() {
+    this.formInit();
+  }
+
+  public formInit() {
+    this.loginForm = this.formBuilder.group({
+      email: [null, Validators.email],
+      pwd: [null, Validators.required]
+    })
+  }
+
+  public emailLogin() {
+    this.us.logInWithEmail(this.loginForm).then(() => { }).catch((error) => {
+
+    });
   }
 
   public thirdPartyLogin(method: string) {

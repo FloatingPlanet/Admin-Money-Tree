@@ -5,27 +5,31 @@
             <form class="text-center border border-light p-5" action="#!">
 
                 <p class="h4 mb-4">Sign in</p>
+                <form [formGroup]="loginForm" (ngSubmit)="emailLogin()">
+                    <div class="form-container">
+                        <!-- Email -->
+                        <input type="email" id="defaultLoginFormEmail" required formControlName="email"
+                            class="form-control mb-4" placeholder="E-mail">
 
-                <!-- Email -->
-                <input type="email" id="defaultLoginFormEmail" disabled class="form-control mb-4" placeholder="E-mail">
-
-                <!-- Password -->
-                <input type="password" id="defaultLoginFormPassword" disabled class="form-control mb-4"
-                    placeholder="Password">
-
-                <div class="d-flex justify-content-around">
-                    <div>
-                        <!-- Remember me -->
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                            <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
-                        </div>
+                        <!-- Password -->
+                        <input type="password" id="defaultLoginFormPassword" required formControlName="pwd"
+                            class="form-control mb-4" placeholder="Password">
                     </div>
+                    <div class="d-flex justify-content-around">
+                        <div>
+                            <!-- Remember me -->
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                                <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                            </div>
+                        </div>
 
-                </div>
-
-                <!-- Sign in button -->
-                <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+                    </div>
+                    {{this.loginForm.value| json}}
+                    <!-- Sign in button -->
+                    <button class="btn btn-info btn-block my-4" type="submit" [disabled]="!this.loginForm.valid">Sign
+                        in</button>
+                </form>
 
                 <!-- grant permission -->
                 <!-- loophole -->

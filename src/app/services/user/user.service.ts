@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import { promise } from 'protractor';
+import { resolve } from 'dns';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +13,6 @@ export class UserService {
 
 
   constructor(private router: Router) { }
-
-  public login(email: string, pwd: string) {
-    firebase.auth().signInWithEmailAndPassword(email, pwd).then((res) => {
-      res.user.getIdTokenResult
-    }).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
-  }
 
   /*
   * third party login
@@ -45,18 +37,27 @@ export class UserService {
       default:
         break;
     }
-    this.thirdPartyLogin(provider).then((res) => {
-      res.user.getIdTokenResult().then((user) => {
-        if (user.claims.admin) {
+    return new Promise((resolve, reject) => {
+      this.thirdPartyLogin(provider).then((res) => {
+        res.user.getIdTokenResult().then((user) => {
+          if (user.claims.admin) {
+            resolve();
+          } else {
+            this.authenticationNotMet();
+          }
+        })
+      }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
         } else {
-          alert("You are not admin! \nContact admin to grant you permission!");
-          console.error('you are not admin')
+          alert(errorMessage);
         }
+        console.log(error);
+        reject();
       })
-    }).catch((error) => {
-      console.error(error);
     });
-
   }
   public thirdPartyLogin(provider: firebase.auth.AuthProvider) {
     return firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
@@ -71,6 +72,33 @@ export class UserService {
   /*
   * end of login method
   */
+  public logInWithEmail(fg: FormGroup) {
+    return new Promise((resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(fg.value.email, fg.value.pwd).then((res) => {
+        res.user.getIdTokenResult().then((user) => {
+          if (user.claims.admin) {
+            resolve();
+          } else {
+            this.authenticationNotMet();
+          }
+        })
+      }).catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        reject();
+      })
+    })
+  }
+  /*
+  * email login
+  */
+
 
   /*
   * logout
@@ -105,7 +133,11 @@ export class UserService {
         reject(error);
       })
     })
-
   }
 
+  private authenticationNotMet() {
+    alert("You are not admin! \nContact admin to grant you permission!");
+    console.error('you are not admin')
+  }
 }
+
