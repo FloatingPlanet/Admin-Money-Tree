@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Product } from 'src/app/models/product';
 import { BehaviorSubject } from 'rxjs';
 import { CategoryService } from '../category/category.service';
-import * as firebase from 'firebase';
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +33,7 @@ return products observable
   public addProduct(product: Product) {
     return new Promise((resolve, reject) => {
       product.productSummary = product.productCategory.join(' ');
-      product.productAddedAt = firebase.firestore.Timestamp.now();
+      product.productAddedAt = Date.now();
       this.Products.doc(product.SKU).ref.get().then(() => {
         this.Products.doc(product.SKU)
           .set(product)

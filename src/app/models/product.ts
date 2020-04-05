@@ -1,5 +1,3 @@
-import * as firebase from 'firebase';
-
 export class Product {
     SKU: string;
     productId: string;
@@ -24,7 +22,7 @@ export class Product {
         this.productPrice = 0;
         this.productDescription = '';
         this.productImageUrls = [new UrlItem()];
-        this.productAddedAt = firebase.firestore.Timestamp.now();
+        this.productAddedAt = Date.now();
         this.productQuantity = 0;
         this.ratings = 0;
         this.favourite = false;
