@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}">
     <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-lg-6 m-auto">
         <nb-card>
             <nb-card-header>Edit Product</nb-card-header>

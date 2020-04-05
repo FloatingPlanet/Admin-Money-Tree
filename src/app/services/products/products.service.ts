@@ -42,7 +42,7 @@ return products observable
             reject('Add product failed');
           });
         resolve(`doc ${product.SKU} added`);
-        product.productCategory.forEach(c => this.cs.addProductToCategory(c, product));
+        // product.productCategory.forEach(c => this.cs.addProductToCategory(c, product));
       }).catch((error) => {
         console.error(error);
         reject(`fetch doc ${product.SKU} failed`);

@@ -31,7 +31,7 @@ const routes: Routes = [
       */
       { path: 'collections/products', component: ProductsComponent },
       { path: 'collections/products/add', component: ProductFormComponent },
-      { path: 'collections/modify/:SKU', component: ProductFormComponent },
+      { path: 'collections/products/modify/:SKU', component: ProductFormComponent },
 
       /*
       * promotions tab

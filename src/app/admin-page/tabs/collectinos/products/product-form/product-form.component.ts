@@ -27,43 +27,55 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   private categoriesObservable$: Subscription;
   public selectedCats = [];
 
+  public loading = false;
   constructor(private formBuilder: FormBuilder, private cs: CategoryService, private ps: ProductsService, private route: ActivatedRoute, private ws: NbWindowService) {
 
   }
 
 
   ngOnInit() {
-    this.initForm();
-    this.SKU = this.route.snapshot.paramMap.get('SKU');
-    if (this.SKU) {
-      this.ps.fetchProduct(this.SKU).then(result => {
-        this.notEditable = !this.notEditable;
-        this.product = result as Product;
-        this.getProductImageUrls.clear();
-        this.product.productImageUrls.forEach((item: any) => {
-          this.getProductImageUrls.push(this.formBuilder.group({ url: item.url }));
+    this.loading = true;
+    const loadProduct = new Promise((resolve, reject) => {
+      this.initForm();
+      this.SKU = this.route.snapshot.paramMap.get('SKU');
+      if (this.SKU) {
+        this.ps.fetchProduct(this.SKU).then(result => {
+          this.notEditable = !this.notEditable;
+          this.product = result as Product;
+          this.getProductImageUrls.clear();
+          this.product.productImageUrls.forEach((item: any) => {
+            this.getProductImageUrls.push(this.formBuilder.group({ url: item.url }));
+          });
+          this.productForm.patchValue({
+            SKU: this.product.SKU,
+            productId: this.product.productId,
+            productName: this.product.productName,
+            productCategory: this.product.productCategory,
+            productSummary: this.product.productSummary,
+            productPrice: this.product.productPrice,
+            productDescription: this.product.productDescription,
+            productAddedAt: this.product.productAddedAt,
+            productQuantity: this.product.productQuantity,
+            ratings: this.product.ratings,
+            favourite: this.product.favourite,
+            productSeller: this.product.productSeller,
+          });
+        }).catch(error => {
+          reject(error)
         });
-        this.productForm.patchValue({
-          SKU: this.product.SKU,
-          productId: this.product.productId,
-          productName: this.product.productName,
-          productCategory: this.product.productCategory,
-          productSummary: this.product.productSummary,
-          productPrice: this.product.productPrice,
-          productDescription: this.product.productDescription,
-          productAddedAt: this.product.productAddedAt,
-          productQuantity: this.product.productQuantity,
-          ratings: this.product.ratings,
-          favourite: this.product.favourite,
-          productSeller: this.product.productSeller,
-        });
-        console.log(this.productForm.controls.SKU.value);
-        console.log(this.getProductImageUrls);
-      }).catch(error => console.error(error));
-    }
-    this.categoriesObservable$ = this.cs.categoriesObservable.subscribe((res) => {
-      this.allCategories = res;
-    });
+      }
+      this.categoriesObservable$ = this.cs.categoriesObservable.subscribe((res) => {
+        this.allCategories = res;
+      });
+      resolve();
+    })
+
+    loadProduct.then(() => {
+      this.loading = false;
+    }).catch((error) => {
+      console.error(error);
+      this.loading = false;
+    })
   }
 
   public onSubmitProduct() {
