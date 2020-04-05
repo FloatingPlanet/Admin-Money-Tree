@@ -41,16 +41,17 @@ export class PermissionComponent implements OnInit {
     const secondEmail = this.grantPermissionForm?.get('adminEmail2').value;
     if (firstEmail === secondEmail && firstEmail !== '' && this.checked) {
       this.us.addAdminRole(firstEmail).then(() => {
-        this.succeedModal(secondEmail);
+        this.responseModal(secondEmail);
         this.grantPermissionForm.reset();
       }).catch((error) => {
+        alert(`Please make sure ${secondEmail} has tries to log in Admin page once \n or make sure you have rights to add ADMIN`);
         console.error(error);
       })
     } else {
       console.error('you naugty boy, requirements are not meet!');
     }
   }
-  succeedModal(email: string) {
+  responseModal(email: string) {
     this.ds.open(PermissionGrantedModalComponent, {
       context: {
         newAdmin: email,

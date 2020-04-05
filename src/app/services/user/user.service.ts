@@ -49,6 +49,7 @@ export class UserService {
       res.user.getIdTokenResult().then((user) => {
         if (user.claims.admin) {
         } else {
+          alert("You are not admin! \nContact admin to grant you permission!");
           console.error('you are not admin')
         }
       })
@@ -93,8 +94,12 @@ export class UserService {
         granteeEmail: adminEmail,
         granterEmail: firebase.auth().currentUser.email
       }).then((res) => {
+        if (res.data.set) {
+          resolve();
+        } else {
+          reject(`${adminEmail} does not exist in database`);
+        }
         console.log(res);
-        resolve();
       }).catch((error) => {
         console.error(error);
         reject(error);

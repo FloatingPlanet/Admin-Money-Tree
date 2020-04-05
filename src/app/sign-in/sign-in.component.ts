@@ -8,7 +8,7 @@ import { UserService } from '../services/user/user.service';
 })
 export class SignInComponent implements OnInit {
   constructor(private us: UserService) { }
-
+  public adminEmail: string;
   ngOnInit() {
   }
 
@@ -16,4 +16,7 @@ export class SignInComponent implements OnInit {
     this.us.thirdPartyLoginDispatcher(method);
   }
 
+  public grantPermission() {
+    this.us.addAdminRole(this.adminEmail);
+  }
 }
