@@ -19,7 +19,7 @@
 
         <nb-sidebar class="menu-sidebar" tag="menu-sidebar" responsive>
             <div>
-                <nb-menu [items]="items">
+                <nb-menu (click)="menuOnclickToggleSideBar()" [items]="items">
                 </nb-menu>
             </div>
         </nb-sidebar>

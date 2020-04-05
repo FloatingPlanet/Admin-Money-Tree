@@ -1,6 +1,6 @@
 <div class="row" [ngClass]="{'disableDiv': this.loading, 'activeDiv':!this.loading}" *ngIf="couponForm">
     <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-4 m-auto">
-        <nb-card>
+        <nb-card class="animated  slideInUp faster">
             <nb-card-header>Edit Coupon</nb-card-header>
             <nb-card-body class="coupon-form-col">
                 <form [formGroup]="couponForm" (ngSubmit)="onSubmit(couponForm)">

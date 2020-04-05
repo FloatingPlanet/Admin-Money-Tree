@@ -78,4 +78,10 @@ export class AdminPageComponent implements OnInit {
   public toggleSideBar() {
     this.sidebarService.toggle(true, 'menu-sidebar');
   }
+  public menuOnclickToggleSideBar() {
+    if (window.innerWidth < 1200) {
+      this.sidebarService.toggle(true, 'menu-sidebar');
+
+    }
+  }
 }
