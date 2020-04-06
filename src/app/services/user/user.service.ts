@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
-import { promise } from 'protractor';
-import { resolve } from 'dns';
 import { FormGroup } from '@angular/forms';
 
 @Injectable({
@@ -138,6 +136,10 @@ export class UserService {
     })
   }
 
+
+  /*
+  * error message
+  */
   private authenticationNotMet() {
     alert("You are not admin! \nContact admin to grant you permission!");
     console.error('you are not admin')

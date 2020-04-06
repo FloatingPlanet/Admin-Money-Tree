@@ -37,4 +37,5 @@ export class SignInComponent implements OnInit {
   public grantPermission() {
     this.us.addAdminRole(this.adminEmail);
   }
+
 }
