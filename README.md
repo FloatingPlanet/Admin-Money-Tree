@@ -11,3 +11,4 @@ Side notes:
   2. Only user who is granted as admin role can login into admin page. (grant permission in admin->admins->permission), this is accomplished by using firebase functions, setUserClaims
   3. TODO: current version is semi-mobile compatitable.
 #### Most of the features are moved to silver-piggy repo. This repo is no longer under construction!
+#### new features are move to silver-piggy
