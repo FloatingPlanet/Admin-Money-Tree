@@ -1,6 +1,6 @@
 
 ### Admin page for [FloatingPlanet](https://catopia.ca)
-##### [Demo](https://silver-piggy.firebaseapp.com/) test account: test@test.com, pwd: test123456
+##### [Demo](https://silver-piggy.firebaseapp.com/) built from this template. test account: test@test.com, pwd: test123456
 ##### Itergrated with [Nebular](https://akveo.github.io/nebular/docs/components/components-overview)
 ##### Icon list [Eva Icons](https://akveo.github.io/eva-icons/#/)
 ##### If you add http function in firebase, please remember adding function permission in [GCP](https://console.cloud.google.com/functions/list?project=fake-money-tree&authuser=3) may enable billing
